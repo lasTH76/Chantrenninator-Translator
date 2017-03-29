@@ -28,6 +28,53 @@ def nombre():
 	var_textop1 = StringVar()# récupère valeur des dents du plateau
 	ligne_textop1 = Entry(top1, textvariable = var_textop1, width=10)# créer une textbox de longueur 30
 	ligne_textop1.place(x=20, y=80)# coordonnées du textbox
+
+def temps():
+	global tmp, imalive
+	#--------------------------------------------------------------------------
+	##fonction de la fenetre temps
+	def renitial():
+		global tmp
+		tmp=1
+		tmp=30
+		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
+		temps1['text']=str("Time : ")+str(tmp)
+		score1=0
+		bouton1["state"]="normal"
+		reponsa.bind("<Return>", resultat)
+
+	def modifitemps():
+		global tmp
+		tmp=1
+		sleep(1)
+		imnwtime=int(jerenit1.get())
+		tmp=imnwtime
+		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
+		temps1['text']=str("Time : ")+str(tmp)
+		score1=0
+		bouton1["state"]="normal"
+		reponsa.bind("<Return>", resultat)
+	#-------------------------------------------------------------------------
+	##structure de la fenetre temps
+	top2=Toplevel()
+	top2.configure(width=200,height=200)# on regle la taille de la fenetre
+	top2.title("Temps")# on donne un nom a notre fenetre
+	top2.resizable(width=False, height=False)# fonction qui évite le redimensionnement
+	labeltop2 = Label(top2, text="Temps : "+str(tmp)+"s", font = "Helvetica 22 bold")# créer un label avec une police définit
+	labeltop2.place(x=5, y=0)# coordonnées du label
+
+	labelnb2 = Label(top2, text="Entrez la durée du quizz :", font="Helvetica 10 bold")
+	labelnb2.place(x=20, y=50)
+	jerenit1 = StringVar()# récupère valeur des dents du plateau
+	jerenitlabel = Entry(top2, textvariable = jerenit1, width=10, justify=CENTER, font="Helvetica 15 bold")# créer une textbox de longueur 30
+	jerenitlabel.place(x=40, y=80)# coordonnées du textbox
+	b1t2=Button(top2, text="Appliquer", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=modifitemps)
+	b1t2.place(x=110, y=160)
+	b2t2=Button(top2, text="Annuler", padx=15, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=top2.destroy)
+	b2t2.place(x=10, y=160)
+	b2t2=Button(top2, text="Rénitialiser", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=renitial)
+	b2t2.place(x=50, y=120)
+
 #-----------------------------------------------------
 ##menu
 menubar = Menu(jeu1)# on creer une barre de menu
@@ -38,7 +85,7 @@ menubar.add_cascade(label="Fichier", menu=menu1)# on crées un nom au premier bo
 
 menu2 = Menu(menubar, tearoff=0)
 menu2.add_command(label="Nombres", command=nombre)
-menu2.add_command(label="Temps")
+menu2.add_command(label="Temps", command=temps)
 menubar.add_cascade(label="Configuration", menu=menu2)
 
 menu3 = Menu(menubar, tearoff=0)
@@ -58,7 +105,8 @@ part1=0
 partdef=10
 operateurs=["X", "+", "-"]
 t=0
-touche=
+tmp=100
+imalive=0
 #---------------------------------------------------------
 ##calcul
 class The_time(Thread):
@@ -66,16 +114,16 @@ class The_time(Thread):
 		Thread.__init__(self)
 
 	def run(self):
-		global temps1, bouton1, tmp
-		tmp=30
+		global temps1, bouton1, tmp, reponsa
 		while tmp!=0:
 			temps1['text']=str("Time : ")+str(tmp)
 			tmp=tmp-1
 			sleep(1)
 		bouton1["state"]="disabled"
+		reponsa.unbind("<Return>")
 
-def resultat():
-	global part1,opera1,a,b,c,reponsa,score1, t
+def resultat(event):
+	global part1,opera1,a,b,c, reponsa,score1, t
 	try:
 		if t==0:
 			Timone = The_time()
@@ -107,8 +155,7 @@ def resultat():
 	calcul1['text'] = str(a)+str(c)+str(b)
 	reponsa.delete(0, END)
 #----------------------------------------------------------
-labelt1=Label(jeu1, text="Répondre le plus vite possible", font = "Helvetica 15 bold")
-labelt1.place(x=5, y=0)
+#réponder au question avant le temps imparti
 
 tot2=Label(jeu1, text="Résultat : ", font = "Helvetica 20 bold")
 tot2.place(x=20, y=220)
@@ -122,18 +169,18 @@ c=random.choice(operateurs)
 opera1=operateurs.index(c)
 calcul1['text'] = str(a)+str(c)+str(b)
 
-labscore=Label(jeu1, text="Point : ", font = "Helvetica 20 bold")
+labscore=Label(jeu1, text="Point : "+str(0), font = "Helvetica 20 bold")
 labscore.place(x=20, y=260)
 
 reponse = StringVar()
 reponsa = Entry(jeu1, textvariable = reponse, width=21, font="Helvetica 15 bold", justify=CENTER)
 reponsa.place(x=30, y=140)
-reponsa.bind("<Return>", resultat)
 
 bouton1=Button(jeu1, text="Entrer", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=resultat)# créer un boutton de longueur 200 et largeur 10 avec une ccouleur plus grise quand le bouton est pressé
 bouton1.place(x=120, y=180)
+reponsa.bind("<Return>", resultat)
 
-temps1=Label(jeu1, text="Time : ", font = "Helvetica 15 bold")
+temps1=Label(jeu1, text="Time : "+str(tmp), font = "Helvetica 15 bold")
 temps1.place(x=5, y=180)
 
 jeu1.mainloop()
