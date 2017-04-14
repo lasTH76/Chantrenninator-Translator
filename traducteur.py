@@ -26,7 +26,7 @@ print("Tu vas maintenant avoir 15 mots à traduire.")
 lstA = [line.split('/n') for line in fA.readlines()]
 lstF = [line.split('/n') for line in fF.readlines()]
 
-print(len(listfF))
+print(len(listfF), len(listfA))
 
 fA.close()
 fF.close()
