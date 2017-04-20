@@ -1,16 +1,16 @@
-ï»¿vous
+vous
 tu
 je
 le
 la
 les
 et
-ça
+ca
 cela
 de
 moi
 quoi
-être
+etre
 dans
 ceci
 pour
@@ -24,8 +24,8 @@ mais
 tout
 tous
 bien
-à propos de
-à peu près
+a propos de
+a peu pres
 environ
 bon
 correct
@@ -37,7 +37,7 @@ obtenir
 ici
 aller
 aimer
-apprécier
+apprecier
 si
 elle
 pouvoir
@@ -47,9 +47,9 @@ penser
 maintenant
 lui
 chez
-à
+a
 comment
-là
+la
 il y a
 un
 une
@@ -94,7 +94,7 @@ avoir besoin
 jamais
 aussi
 aimer
-sûr
+sur
 certain
 elles
 eux
@@ -104,18 +104,18 @@ encore
 au-dessus de
 notre
 nos
-désolé
-où
+desole
+ou
 laisser
 bas
-très
+tres
 par
 n'importe quoi
 beaucoup
 un homme
 la vie
-s'il te plaît
-s'il vous plaît
+s'il te plait
+s'il vous plait
 merci
 ton
 votre
@@ -124,47 +124,47 @@ dehors
 dehors
 droite
 droit
-compétent
-doué
+competent
+doue
 un compte
 acide
-de l'autre côté de
-à travers
+de l'autre cote de
+a travers
 en face de
 agir
 une addition
-un réglage
-la publicité
+un reglage
+la publicite
 la pub
 contre
 un accord
 presque
-une quantité
+une quantite
 un angle
-fâché
-en colère
+fache
+en colere
 un animal
-une réponse
+une reponse
 une fourmi
 une pomme
 une arche
 une dispute
 un bras
-une armée
+une armee
 un art
 une attaque
 une tentative
-l'autorité
+l'autorite
 automatique
-éveillé
-réveillé
-un bébé
+eveille
+reveille
+un bebe
 un sac
-équilibrer
-être en équilibre
-tenir en équilibre
+equilibrer
+etre en equilibre
+tenir en equilibre
 une balance
-l'équilibre
+l'equilibre
 une balle
 une banque
 beau
@@ -179,7 +179,7 @@ tordre
 une baie
 un oiseau
 une naissance
-mériter
+meriter
 un compte en banque
 un compte bancaire
 entrer
@@ -190,7 +190,7 @@ la croyance
 un animal domestique
 un animal de compagnie
 une morsure
-une piqûre
+une piqure
 amer
 noir
 la lame
@@ -208,7 +208,7 @@ les os
 un livre
 une botte
 une bouteille
-un garçon
+un garcon
 le cerveau
 le frein
 une branche
@@ -218,52 +218,52 @@ la respiration
 une brique
 un pont
 brillant
-cassé
-le frère
+casse
+le frere
 marron
 brun
 un balai
 une brosse
 un seau
 une ampoule
-brûler
-éclater
+bruler
+eclater
 le beurre
 un bouton
-un gâteau
+un gateau
 un appareil photo
-une caméra
+une camera
 une toile
 une carte
-faire attention à
-s'intéresser à
+faire attention a
+s'interesser a
 un chariot
 une charette
 un chat
 une chatte
 la cause
 un immeuble
-un bâtiment
+un batiment
 la planche
 le tableau
 savoir
-connaître
-une boîte
-peut-être
+connaitre
+une boite
+peut-etre
 le pire
 le plus mauvais
-éventuellement
-peut-être
+eventuellement
+peut-etre
 en haut
 un juge
 la terre
-privé
-privée
+prive
+privee
 un soldat
-présenter
+presenter
 un cadeau
 un cadeau
-présent
+present
 actuel
 tout
 le sol
@@ -278,9 +278,9 @@ courant
 normal
 la glace
 devoir
-soi-même
-lui-même
-elle-même
+soi-meme
+lui-meme
+elle-meme
 noir
 obscur
 sombre
@@ -288,23 +288,23 @@ poser
 mettre
 conserver
 garder
-réussir
+reussir
 surpris
-étonné
-près de
-près
+etonne
+pres de
+pres
 appeler
 tenir
 l'attention
 une prison
 une prison
 passer
-dépenser
+depenser
 respecter
 le respect
-réparer
-réparer
-déterminer
+reparer
+reparer
+determiner
 fixer
 tomber
 une chute
@@ -314,7 +314,7 @@ finir
 terminer
 finir
 terminer
-les vêtements
+les vetements
 mentionner
 faire mention de
 battre
@@ -325,20 +325,20 @@ bref
 petit
 rester
 une route
-inquiète
+inquiete
 inquiet
 calme
-apprécier
+apprecier
 s'amuser
-un hôtel
-intéressant
+un hotel
+interessant
 une robe
 mignonne
 mignon
 une preuve
 un indice
 une indication
-un désordre
+un desordre
 un bazar
 une liste
 la voix
@@ -346,7 +346,7 @@ simple
 facile
 se demander
 un pied
-être pressé
+etre presse
 une offre
 offrir
 partager
@@ -354,73 +354,73 @@ l'histoire
 une addition
 une facture
 un anniversaire
-être d'accord
+etre d'accord
 fier
 un petit ami
 un petit copain
 compter
-un état
+un etat
 difficile
 coriace
 robuste
 un papier
 la musique
-la crête
-l'arête
-espérer
-le déjeuner
-plutôt
-plutôt
+la crete
+l'arete
+esperer
+le dejeuner
+plutot
+plutot
 une dame
 porter
 pardonner
 se lever
 se lever
-la réputation
+la reputation
 le rang
-être debout
+etre debout
 rester debout
 se tenir debout
 la guerre
 courir
 un ange
-tôt
+tot
 en avance
-arrêter
-écrire
+arreter
+ecrire
 un copain
 un pote
 au lieu de
-à la place
+a la place
 un petit peu de
 un peu de
 recouvrir
 couvrir
 une course
 une course
-une décision
+une decision
 embarquer
-monter à bord
+monter a bord
 emprisonner
-incarcérer
+incarcerer
 mettre en prison
 capable
-compétent
-doué
+competent
+doue
 une chose
 un truc
 pair
-même
-une façon
-une manière
+meme
+une facon
+une maniere
 un chemin
 suivre
-un bâton
+un baton
 tirer
 lancer
 comprendre
 trouver
-une équipe
+une equipe
 prudent
 minutieux
 un anneau
@@ -430,7 +430,7 @@ enceinte
 la bouche
 devenir
 une table
-interessé
+interesse
 petit
 une fille
 une femme
