@@ -1,28 +1,31 @@
 from tkinter import *
 import tkinter as tk
+from tkinter.messagebox import *
 import os
 import sys
 import time
-import smtplib
-import subprocess
-#----------------------------------------------------
-##fenetre de configuration
+from time import time, sleep
+import random
+from threading import Thread
+#--------------------------------------------------------------------------------------------------------------
 fenetre = Tk()
 fenetre.configure(width=550, height=400)
 fenetre.title("Jeux de réflexion et de logique")
 fenetre.resizable(width=False, height=False)
 
-textitlemenu=PhotoImage(file="title_menu.png")
-canttml = Canvas(fenetre, width=227,height=62)
+#--------------------------------------------------------------------------------------------------------------
+##image menu
+textitlemenu=PhotoImage(file="image/nuage_title-menu.png")
+canttml = Canvas(fenetre, width=500,height=145)
 canttml.create_image(0,0,anchor='nw', image=textitlemenu)
-canttml.place(x=165, y=30)
+canttml.place(x=115, y=20)
 
-gif_parle=PhotoImage(file="einstein_montre.gif")
+gif_parle=PhotoImage(file="image/einstein_montre.gif")
 can1 = Canvas(fenetre, width=120,height=135)
 can1.create_image(0,0,anchor='nw', image=gif_parle)
 can1.place(x=10, y=0)
 
-gif_parle2=PhotoImage(file="einstein_montre.gif")
+gif_parle2=PhotoImage(file="image/einstein_montre.gif")
 can2 = Canvas(fenetre, width=120,height=135)
 can2.create_image(0,0,anchor='nw', image=gif_parle2)
 can2.place(x=450, y=0)
@@ -36,13 +39,13 @@ def update(delay=200):
     gif_parle2.configure(format="gif -index " + str(ind))
     fenetre.after(delay, update)
 update()
-#----------------------------------------------------
-##
-def graphf():
-	graphf=Toplevel()
-	graphf.configure(width=350,height=200)# on regle la taille de la fenetre
-	graphf.title("Graphique")# on donne un nom a notre fenetre
-	graphf.resizable(width=False, height=False)# fonction qui évite le redimensionnement
+#--------------------------------------------------------------------------------------------------------------
+##fonction menu
+def menu_graphf():
+	menu_graphf=Toplevel()
+	menu_graphf.configure(width=350,height=200)# on regle la taille de la fenetre
+	menu_graphf.title("Graphique")# on donne un nom a notre fenetre
+	menu_graphf.resizable(width=False, height=False)# fonction qui évite le redimensionnement
 
 def reportf():
 	reportf=Toplevel()
@@ -64,8 +67,8 @@ def reportf():
 	toaddrs  = 'dylan.wolverine@gmail.com'
 	msg = sujetext1
 
-#----------------------------------------------------
-##menu
+#--------------------------------------------------------------------------------------------------------------
+##menubar menu
 menubar = Menu(fenetre)# on creer une barre de menu
 
 menu1 = Menu(menubar, tearoff=0)#on crées un premier boutton pour le menu
@@ -73,7 +76,7 @@ menu1.add_command(label="Quitter", command=fenetre.destroy)# on crées un boutto
 menubar.add_cascade(label="Fichier", menu=menu1)# on crées un nom au premier boutton du menu
 
 menu2 = Menu(menubar, tearoff=0)
-menu2.add_command(label="Graphique", command=graphf)
+menu2.add_command(label="Graphique", command=menu_graphf)
 menubar.add_cascade(label="Progression", menu=menu2)
 
 menu3 = Menu(menubar, tearoff=0)
@@ -82,14 +85,16 @@ menu3.add_command(label="Reporter un bug", command=reportf)
 menubar.add_cascade(label="Aide", menu=menu3)
 
 fenetre.config(menu=menubar)# on configure la barre de menu
+#--------------------------------------------------------------------------------------------------------------
+##fonction ouverture
+def batjeu1():
+	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC")
+	os.system("jeu_calcul_mental.py")
 
-#-----------------------------------------------------
-##bouton
-def test():
-	subprocess.call("start python jeu1.py")
-
-
-boutonreni=Button(fenetre, text=" ", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=test)
-boutonreni.place(x=180, y=180)
+#--------------------------------------------------------------------------------------------------------------
+##bouton menu
+imageb1calc= PhotoImage(file="image/nuage_title-jeu.png")
+boutonreni=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#0076BB", image=imageb1calc, bg="#00a2ff", command=batjeu1)
+boutonreni.place(x=10, y=180)
 
 fenetre.mainloop()
