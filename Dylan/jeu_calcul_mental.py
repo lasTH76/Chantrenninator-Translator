@@ -13,15 +13,14 @@ jeu1.configure(width=300, height=300)
 jeu1.title("Calcul mental")
 jeu1.resizable(width=False, height=False)
 
-textitle=PhotoImage(file="titlejeu.png")
+textitle=PhotoImage(file="image/nuage_title-jeu.png")
 canttl = Canvas(jeu1, width=227,height=62)
 canttl.create_image(0,0,anchor='nw', image=textitle)
-canttl.place(x=35, y=10)
+canttl.place(x=45, y=10)
 
 #-----------------------------------------------------
 ##9000
 def aide():
-	global nbmin, nbmax
 	top1=Toplevel()
 	top1.configure(width=350,height=200)# on regle la taille de la fenetre
 	top1.title("Help")# on donne un nom a notre fenetre
@@ -35,8 +34,7 @@ def temps():
 	##fonction de la fenetre temps
 	def renitial():
 		global tmp
-		tmp=1
-		sleep(1)
+		The_time.pause(self)
 		tmp=30
 		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
 		temps1['text']=str("Time : ")+str(tmp)
@@ -45,8 +43,7 @@ def temps():
 
 	def modifitemps():
 		global tmp
-		tmp=1
-		sleep(1)
+		The_time.pause(self)
 		imnwtime=int(jerenit1.get())
 		tmp=imnwtime
 		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
@@ -93,7 +90,7 @@ menubar.add_cascade(label="A propos", menu=menu3)
 jeu1.config(menu=menubar)# on configure la barre de menu
 #-----------------------------------------------------
 ##Image
-validato = PhotoImage(file="null.png")# on ajoute une photo au programme pour la devanture
+validato = PhotoImage(file="image/null.png")# on ajoute une photo au programme pour la devanture
 canvas = Canvas(jeu1,width=30, height=30)# on régle la taille alloué pour l'image
 canvas.create_image(0, 0, anchor=NW,image=validato)
 canvas.place(x=250, y=140)
@@ -103,27 +100,36 @@ part1=0
 partdef=10
 operateurs=["X", "+", "-"]
 t=0
-tmp=100
+tmp=10
 #---------------------------------------------------------
 ##calcul
 class The_time(Thread):
 	def __init__(self):
 		Thread.__init__(self)
+		self.pause=False
 
 	def run(self):
 		global temps1, tmp
-		while tmp!=0:
-			temps1['text']=str("Time : ")+str(tmp)
-			tmp=tmp-1
-			sleep(1)
+		while False:
+			while tmp!=0:
+				temps1['text']=str("Time : ")+str(tmp)
+				tmp=tmp-1
+				sleep(1)
+			self.pause=True
 		reponsa.unbind("<Return>")
 		boutonreni.config(state = NORMAL)
 
+	def pause(self):
+		self.pause=True
+	def resume(self):
+		self.pause=False
+
 
 def resultat(event):
-	global part1,opera1,a,b,c, reponsa,score1, t
+	global part1,opera1,a,b,c, reponsa,score1, t, tmp, tmpr
 	try:
 		if t==0:
+			tmpr=tmp
 			Timone = The_time()
 			Timone.start()
 			t=1
@@ -137,11 +143,11 @@ def resultat(event):
 		else:
 			tot=a-b
 		if str(repon1)==str(tot):
-			validato.config(file="valide2.png")
+			validato.config(file="image/valide2.png")
 			score1+=1
 			labscore['text']=str("Point : ")+str(score1)
 		else:
-			validato.config(file="faux2.png")
+			validato.config(file="image/faux2.png")
 		tot2['text']=str("Résultat : ")+str(tot)
 	except ValueError:
 		showerror("Erreur", "Incorrect")
@@ -155,6 +161,8 @@ def resultat(event):
 
 def reniti1():
 	global temps1, score1
+	The_time.resume(self)
+	tmp=tmpr
 	temps1['text']=str("Time : ")+str(tmp)
 	tot2['text']=str("Résultat : ")
 	score1=0

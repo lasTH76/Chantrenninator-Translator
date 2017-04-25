@@ -76,14 +76,11 @@ while not choix in ("Francais", "Anglais"):
 				if ReponseJoueur != reponse:
 					nbrEssai += -1
 					print("Il vous reste", nbrEssai, "essais.", end= '\n')
-					print("")
 				if ReponseJoueur == reponse and nbrEssai >= 0:
 					score += 1
-					print("")
 					break
 			if nbrEssai == 0 and ReponseJoueur != reponse:
 				print("La reponse était", reponse,".")
-				print()
 			nbrEssai = 5
 
 
@@ -100,17 +97,14 @@ while not choix in ("Francais", "Anglais"):
 				if ReponseJoueur != reponse:
 					nbrEssai += -1
 					print("Il vous reste", nbrEssai, "essais.", end= '\n')
-					print("")
 				if ReponseJoueur == reponse and nbrEssai >= 0:
 					score += 1
-					print("")
 					break
 			if nbrEssai == 0 and ReponseJoueur != reponse:
 				print("La reponse était", reponse,".")
-				print()
 			nbrEssai = 5
 
-print(prenom, ",vous avez un score de",score,"sur",nbMot)
+print(prenom, ",vous avez un score de",score,"sur",(loop +1))
 
 
 fA.close()
