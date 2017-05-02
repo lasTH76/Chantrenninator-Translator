@@ -7,6 +7,18 @@ import time
 from time import time, sleep
 import random
 from threading import Thread
+
+#--------------------------------------------------------------------------------------------------------------
+def SearchPath():
+	if getattr(sys, 'frozen', False):
+		datadir = os.path.dirname(sys.executable)
+	else:
+		datadir = os.path.dirname(__file__)
+	return datadir
+
+
+chemin = SearchPath()
+CheminAbsolu = os.path.join(chemin, "Chantrenninator-Translator")
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk()
 fenetre.configure(width=550, height=400)
