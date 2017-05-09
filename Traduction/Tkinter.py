@@ -1,12 +1,17 @@
 from tkinter import *
-import traducteur.py as trad
-import JeuMorse.py as morse
+import traducteur as trad
+import JeuMorse as morse
 
 fenetre1 = Tk()
 fenetre1.title('Jeux de traductions Morse et Fr/An')
 
-interface = Interface(fenetre1)
-Bouton1 = Button(fentetre1, text = 'Jeu de traduction Fr/An', command = Frame.trad)
+def fenetre():
+    global fenetre2
+    fenetre2 = Toplevel()
 
+Bouton1 = Button(fenetre1, text = 'Jeu de traduction Fr/An', command = fenetre)
+Bouton2 = Button(fenetre1, text = 'Jeu de morse', command = fenetre)
+Bouton1.pack()
+Bouton2.pack()
 
-interface.mainloop()
+fenetre1.mainloop()
