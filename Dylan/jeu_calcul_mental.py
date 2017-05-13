@@ -8,68 +8,69 @@ import random
 from threading import Thread
 #----------------------------------------------------
 ##fenetre de configuration
-jeu1 = Tk()
-jeu1.configure(width=300, height=300)
-jeu1.title("Calcul mental")
-jeu1.resizable(width=False, height=False)
+def jeu():
+        jeu1 = Tk()
+        jeu1.configure(width=300, height=300)
+        jeu1.title("Calcul mental")
+        jeu1.resizable(width=False, height=False)
 
-textitle=PhotoImage(file="image/nuage_title-jeu.png")
-canttl = Canvas(jeu1, width=227,height=62)
-canttl.create_image(0,0,anchor='nw', image=textitle)
-canttl.place(x=45, y=10)
+        textitle=PhotoImage(file="image/nuage_title-jeu.png")
+        canttl = Canvas(jeu1, width=227,height=62)
+        canttl.create_image(0,0,anchor='nw', image=textitle)
+        canttl.place(x=45, y=10)
 
 #-----------------------------------------------------
 ##9000
 def aide():
-	top1=Toplevel()
-	top1.configure(width=350,height=200)# on regle la taille de la fenetre
-	top1.title("Help")# on donne un nom a notre fenetre
-	top1.resizable(width=False, height=False)# fonction qui évite le redimensionnement
-	labeltop1 = Label(top1, text="Utilisation du jeu", font = "Helvetica 22 bold")# créer un label avec une police définit
-	labeltop1.place(x=45, y=0)# coordonnées du label
+        top1=Toplevel()
+        top1.configure(width=350,height=200)# on regle la taille de la fenetre
+        top1.title("Help")# on donne un nom a notre fenetre
+        top1.resizable(width=False, height=False)# fonction qui évite le redimensionnement
+        labeltop1 = Label(top1, text="Utilisation du jeu", font = "Helvetica 22 bold")# créer un label avec une police définit
+        labeltop1.place(x=45, y=0)# coordonnées du label
 
 def temps():
-	global tmp
-	#--------------------------------------------------------------------------
-	##fonction de la fenetre temps
-	def renitial():
-		global tmp
-		The_time.pause(self)
-		tmp=30
-		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
-		temps1['text']=str("Time : ")+str(tmp)
-		score1=0
-		reponsa.bind("<Return>", resultat)
+        global tmp
+        #--------------------------------------------------------------------------
+        ##fonction de la fenetre temps
+        def renitial():
+                global tmp
+                The_time.pause(self)
+                tmp=30
+                labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
+                temps1['text']=str("Time : ")+str(tmp)
+                score1=0
+                reponsa.bind("<Return>", resultat)
 
-	def modifitemps():
-		global tmp
-		The_time.pause(self)
-		imnwtime=int(jerenit1.get())
-		tmp=imnwtime
-		labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
-		temps1['text']=str("Time : ")+str(tmp)
-		score1=0
-		reponsa.bind("<Return>", resultat)
-	#-------------------------------------------------------------------------
-	##structure de la fenetre temps
-	top2=Toplevel()
-	top2.configure(width=200,height=200)# on regle la taille de la fenetre
-	top2.title("Temps")# on donne un nom a notre fenetre
-	top2.resizable(width=False, height=False)# fonction qui évite le redimensionnement
-	labeltop2 = Label(top2, text="Temps : "+str(tmp)+"s", font = "Helvetica 22 bold")# créer un label avec une police définit
-	labeltop2.place(x=5, y=0)# coordonnées du label
+        def modifitemps():
+                global tmp
+                The_time.pause(self)
+                imnwtime=int(jerenit1.get())
+                tmp=imnwtime
+                labeltop2['text']=str("Temps : ")+str(tmp)+str("s")
+                temps1['text']=str("Time : ")+str(tmp)
+                score1=0
+                reponsa.bind("<Return>", resultat)
+        #-------------------------------------------------------------------------
+        ##structure de la fenetre temps
+        top2=Toplevel()
+        top2.configure(width=200,height=200)# on regle la taille de la fenetre
+        top2.title("Temps")# on donne un nom a notre fenetre
+        top2.resizable(width=False, height=False)# fonction qui évite le redimensionnement
+        labeltop2 = Label(top2, text="Temps : "+str(tmp)+"s", font = "Helvetica 22 bold")# créer un label avec une police définit
+        labeltop2.place(x=5, y=0)# coordonnées du label
 
-	labelnb2 = Label(top2, text="Entrez la durée du quizz :", font="Helvetica 10 bold")
-	labelnb2.place(x=20, y=50)
-	jerenit1 = StringVar()# récupère valeur des dents du plateau
-	jerenitlabel = Entry(top2, textvariable = jerenit1, width=10, justify=CENTER, font="Helvetica 15 bold")# créer une textbox de longueur 30
-	jerenitlabel.place(x=40, y=80)# coordonnées du textbox
-	b1t2=Button(top2, text="Appliquer", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=modifitemps)
-	b1t2.place(x=110, y=160)
-	b2t2=Button(top2, text="Annuler", padx=15, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=top2.destroy)
-	b2t2.place(x=10, y=160)
-	b2t2=Button(top2, text="Rénitialiser", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=renitial)
-	b2t2.place(x=50, y=120)
+        labelnb2 = Label(top2, text="Entrez la durée du quizz :", font="Helvetica 10 bold")
+        labelnb2.place(x=20, y=50)
+        jerenit1 = StringVar()# récupère valeur des dents du plateau
+        jerenitlabel = Entry(top2, textvariable = jerenit1, width=10, justify=CENTER, font="Helvetica 15 bold")# créer une textbox de longueur 30
+        jerenitlabel.place(x=40, y=80)# coordonnées du textbox
+        b1t2=Button(top2, text="Appliquer", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=modifitemps)
+        b1t2.place(x=110, y=160)
+        b2t2=Button(top2, text="Annuler", padx=15, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=top2.destroy)
+        b2t2.place(x=10, y=160)
+        b2t2=Button(top2, text="Rénitialiser", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=renitial)
+        b2t2.place(x=50, y=120)
 
 #-----------------------------------------------------
 ##menu
@@ -104,71 +105,71 @@ tmp=10
 #---------------------------------------------------------
 ##calcul
 class The_time(Thread):
-	def __init__(self):
-		Thread.__init__(self)
-		self.pause=False
+        def __init__(self):
+                Thread.__init__(self)
+                self.pause=False
 
-	def run(self):
-		global temps1, tmp
-		while False:
-			while tmp!=0:
-				temps1['text']=str("Time : ")+str(tmp)
-				tmp=tmp-1
-				sleep(1)
-			self.pause=True
-		reponsa.unbind("<Return>")
-		boutonreni.config(state = NORMAL)
+        def run(self):
+                global temps1, tmp
+                while False:
+                        while tmp!=0:
+                                temps1['text']=str("Time : ")+str(tmp)
+                                tmp=tmp-1
+                                sleep(1)
+                        self.pause=True
+                reponsa.unbind("<Return>")
+                boutonreni.config(state = NORMAL)
 
-	def pause(self):
-		self.pause=True
-	def resume(self):
-		self.pause=False
+        def pause(self):
+                self.pause=True
+        def resume(self):
+                self.pause=False
 
 
 def resultat(event):
-	global part1,opera1,a,b,c, reponsa,score1, t, tmp, tmpr
-	try:
-		if t==0:
-			tmpr=tmp
-			Timone = The_time()
-			Timone.start()
-			t=1
-		else:
-			t=1
-		repon1=str(reponse.get())
-		if opera1==0:
-			tot=a*b
-		elif opera1==1:
-			tot=a+b
-		else:
-			tot=a-b
-		if str(repon1)==str(tot):
-			validato.config(file="image/valide2.png")
-			score1+=1
-			labscore['text']=str("Point : ")+str(score1)
-		else:
-			validato.config(file="image/faux2.png")
-		tot2['text']=str("Résultat : ")+str(tot)
-	except ValueError:
-		showerror("Erreur", "Incorrect")
-	part1+=1
-	a=random.randint(0,10)
-	b=random.randint(0,10)
-	c=random.choice(operateurs)
-	opera1=operateurs.index(c)
-	calcul1['text'] = str(a)+str(c)+str(b)
-	reponsa.delete(0, END)
+        global part1,opera1,a,b,c, reponsa,score1, t, tmp, tmpr
+        try:
+                if t==0:
+                        tmpr=tmp
+                        Timone = The_time()
+                        Timone.start()
+                        t=1
+                else:
+                        t=1
+                repon1=str(reponse.get())
+                if opera1==0:
+                        tot=a*b
+                elif opera1==1:
+                        tot=a+b
+                else:
+                        tot=a-b
+                if str(repon1)==str(tot):
+                        validato.config(file="image/valide2.png")
+                        score1+=1
+                        labscore['text']=str("Point : ")+str(score1)
+                else:
+                        validato.config(file="image/faux2.png")
+                tot2['text']=str("Résultat : ")+str(tot)
+        except ValueError:
+                showerror("Erreur", "Incorrect")
+        part1+=1
+        a=random.randint(0,10)
+        b=random.randint(0,10)
+        c=random.choice(operateurs)
+        opera1=operateurs.index(c)
+        calcul1['text'] = str(a)+str(c)+str(b)
+        reponsa.delete(0, END)
 
 def reniti1():
-	global temps1, score1
-	The_time.resume(self)
-	tmp=tmpr
-	temps1['text']=str("Time : ")+str(tmp)
-	tot2['text']=str("Résultat : ")
-	score1=0
-	reponsa.bind("<Return>", resultat)
-	boutonreni.config(state = DISABLED)
-	t=0
+        global temps1, score1
+        The_time.resume(self)
+        tmp=tmpr
+        temps1['text']=str("Time : ")+str(tmp)
+        tot2['text']=str("Résultat : ")
+        score1=0
+        reponsa.bind("<Return>", resultat)
+        boutonreni.config(state = DISABLED)
+        t=0
 
 #----------------------------------------------------------
 #réponder au question avant le temps imparti
@@ -203,3 +204,6 @@ temps1=Label(jeu1, text="Time : "+str(tmp), font = "Helvetica 15 bold")
 temps1.place(x=5, y=180)
 
 jeu1.mainloop()
+
+if __name__ == '__main__':
+        jeu()
