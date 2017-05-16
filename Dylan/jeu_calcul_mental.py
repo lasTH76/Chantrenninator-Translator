@@ -6,18 +6,28 @@ import sys
 from time import time, sleep
 import random
 from threading import Thread
-#----------------------------------------------------
-##fenetre de configuration
-def jeu():
-        jeu1 = Tk()
-        jeu1.configure(width=300, height=300)
-        jeu1.title("Calcul mental")
-        jeu1.resizable(width=False, height=False)
 
-        textitle=PhotoImage(file="image/nuage_title-jeu.png")
-        canttl = Canvas(jeu1, width=227,height=62)
-        canttl.create_image(0,0,anchor='nw', image=textitle)
-        canttl.place(x=45, y=10)
+#--------------------------------------------------------------------------------------------------------------
+def SearchPath():
+	if getattr(sys, 'frozen', False):
+		datadir = os.path.dirname(sys.executable)
+	else:
+		datadir = os.path.dirname(__file__)
+	return datadir
+
+chemin = SearchPath()
+CheminAbsolu = os.path.join(chemin, "Chantrenninator-Translator")
+#--------------------------------------------------------------------------------------------------------------
+##fenetre de configuration
+jeu1 = Tk()
+jeu1.configure(width=300, height=300)
+jeu1.title("Calcul mental")
+jeu1.resizable(width=False, height=False)
+
+textitle=PhotoImage(file=os.path.join(chemin,"image/nuage_title-jeu.png"))
+canttl = Canvas(jeu1, width=227,height=62)
+canttl.create_image(0,0,anchor='nw', image=textitle)
+canttl.place(x=45, y=10)
 
 #-----------------------------------------------------
 ##9000
@@ -91,7 +101,7 @@ menubar.add_cascade(label="A propos", menu=menu3)
 jeu1.config(menu=menubar)# on configure la barre de menu
 #-----------------------------------------------------
 ##Image
-validato = PhotoImage(file="image/null.png")# on ajoute une photo au programme pour la devanture
+validato = PhotoImage(file=os.path.join(chemin, "image/null.png"))# on ajoute une photo au programme pour la devanture
 canvas = Canvas(jeu1,width=30, height=30)# on régle la taille alloué pour l'image
 canvas.create_image(0, 0, anchor=NW,image=validato)
 canvas.place(x=250, y=140)

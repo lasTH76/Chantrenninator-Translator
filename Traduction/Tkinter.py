@@ -32,3 +32,6 @@ Bouton1.pack(side=LEFT, padx=6, pady=6)
 Bouton2.pack(side=RIGHT, padx=6, pady=6)
 
 fenetre1.mainloop()
+
+if fenetre1.quit :
+    fenetre1.destroy()
