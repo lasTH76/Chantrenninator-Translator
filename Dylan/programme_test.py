@@ -17,7 +17,6 @@ def SearchPath():
 		datadir = os.path.dirname(__file__)
 	return datadir
 
-
 chemin = SearchPath()
 CheminAbsolu = os.path.join(chemin, "Chantrenninator-Translator")
 #--------------------------------------------------------------------------------------------------------------
