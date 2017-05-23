@@ -13,10 +13,13 @@ def fenetre():
 def alert():
     showinfo("alerte", "Bravo")
 
+def parametre():
+    
+
 menubarre = Menu(fenetre1)
 
 menu1 = Menu(menubarre, tearoff=0)
-menu1.add_command(label="Paramètres", command = alert)
+menu1.add_command(label="Paramètres", command = parametre)
 menu1.add_command(label='Scores', command = alert)
 menu1.add_separator()
 menu1.add_command(label='Quitter', command = fenetre1.quit)
@@ -24,7 +27,7 @@ menubarre.add_cascade(label='Fichier', menu=menu1)
 
 fenetre1.config(menu=menubarre)
 
-fenetre1.resizable(True, True)
+fenetre1.resizable(False, False)
 
 Bouton1 = Button(fenetre1, text = 'Jeu de traduction Fr/An', command = fenetre)
 Bouton2 = Button(fenetre1, text = 'Jeu de morse', command = fenetre)

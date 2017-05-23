@@ -52,7 +52,7 @@ menubar = Menu(windo)
 menu1 = Menu(menubar, tearoff=0)
 menu1.add_command(label="France")
 menu1.add_command(label="Europe")
-menubar.add_cascade(label="Choi de la Region",menu=menu1)
+menubar.add_cascade(label="Choix de la Region",menu=menu1)
 
 menu2 = Menu(menubar, tearoff=0)
 menu2.add_command(label="5",command=nbquestion1)
