@@ -14,7 +14,7 @@ def alert():
     showinfo("alerte", "Bravo")
 
 def parametre():
-    
+    pass
 
 menubarre = Menu(fenetre1)
 

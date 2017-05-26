@@ -63,7 +63,7 @@ label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune a
 ##conan.start()
 
 valueName = StringVar()
-prenom = Entry(fenetreJeu, textvariable = valueName)
+prenom = Entry(fenetreJeu, textvariable = valueName, justify=CENTER)
 prenom.pack()
 
 def entrer():
