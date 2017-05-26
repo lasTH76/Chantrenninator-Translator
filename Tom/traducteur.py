@@ -1,4 +1,4 @@
-import os, random, sys, time, threading
+import os, random, sys, time, threading, shelve
 from tkinter import *
 
 #os.chdir('C:\Python34')
@@ -30,41 +30,47 @@ nbMot = 0
 #---------------------------------------------------------------
 fenetreJeu = Tk()
 fenetreJeu.title("Jeu de traduction")
-fenetreJeu["bg"] = 'grey'
+fenetreJeu["bg"] = 'blue'
+fenetreJeu.geometry("500x400+350+666")
 
+#_______________________________________________________________
+def showScore():
+        HScore = shelve.open('score.txt')
+        score = HScore['score']
 
-class Destructeur(threading.Thread):
-        def __init__(self):
-                threading.Thread.__init__(self)
-        def run(self):
-                time.sleep(3)
-                label1.destroy()
+#_______________________________________________________________
+menubarre = Menu(fenetreJeu)
 
+menu1 = Menu(menubarre)
+menu1.add_command(label='Scores', command = showScore)
+menu1.add_separator()
+menu1.add_command(label='Quitter', command = fenetreJeu.quit)
+menubarre.add_cascade(label='Fichier', menu=menu1)
 
+fenetreJeu.config(menu=menubarre)
 
-label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami. Comment t'appelles-tu? ")
-label1.pack()
+#_______________________________________________________________
+##class Destructeur(threading.Thread):
+##        def __init__(self):
+##                threading.Thread.__init__(self)
+##        def run(self):
+##                time.sleep(5)
+##                label1.destroy()
 
-conan = Destructeur()
-conan.start()
+label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami. Comment t'appelles-tu? ").pack()
+
+##conan = Destructeur()
+##conan.start()
 
 valueName = StringVar()
-valueName.set("Veuillez le renseigner ici")
-prenom = Entry(fenetreJeu, textvariable = valueName, width= 30)
+prenom = Entry(fenetreJeu, textvariable = valueName)
+prenom.pack()
 
-def fonctionAccepte(event):
-        #Ecrit ici la fonction à appeler quand tu appuies sur entree
-        prenom.get()
-	class Destructeur(threading.Thread):
-		def __init__(self):
-			threading.Thread.__init__(self)
-		def run(self):
-			prenom.destroy()
-                
-prenom.bind('<Return>', fonctionAccepte).pack()
+def entrer():
+        label1 = Label(fenetreJeu, text = "Très bien mon jeune " + prenom.get() + ".").pack()
 
-label2 = Label(fenetreJeu, text = "Très bien mon jeune" + prenom.get() + ".")
-##
+bouton1 = Button(fenetreJeu,text = 'Accepter', command = entrer).pack()
+
 ##while nbMot <= 4:
 ##        nbMot = int(input("Indiquer le nombre de mots que vous voulez traduire -->   "))
 ##        if nbMot > 0 and nbMot < 5:
@@ -73,9 +79,6 @@ label2 = Label(fenetreJeu, text = "Très bien mon jeune" + prenom.get() + ".")
 ##print("Tu vas maintenant avoir", nbMot, "mots à traduire.")
 ##print("Fais attention il n'y a pas d'accent.")
 ##print("Maintenant, dans quelle langue veux-tu jouer?")
-##
-##
-##
 ##
 ##def repareMot(mot):
 ##        listeNouvMot = []
