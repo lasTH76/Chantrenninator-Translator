@@ -116,6 +116,8 @@ label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune a
 
 valueName = StringVar()
 prenom = Entry(fenetreJeu, textvariable = valueName).pack()
+prenom = Entry(fenetreJeu, textvariable = valueName, justify=CENTER)
+prenom.pack()
 
 def entrer():
         label1 = Label(fenetreJeu, text = "Très bien mon jeune " + prenom.get() + ".").pack()
