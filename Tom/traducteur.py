@@ -1,4 +1,4 @@
-import os, random, sys, time, threading, shelve
+import os, random, sys, time, threading, shelve, smtplib
 from tkinter import *
 
 #os.chdir('C:\Python34')
@@ -37,15 +37,67 @@ fenetreJeu.geometry("500x400+350+666")
 def showScore():
         HScore = shelve.open('score.txt')
         score = HScore['score']
+	        
+def reportf():
+	reportf=Toplevel()
+	reportf.configure(width=600, height=300)
+	reportf.title("Reporter un bug")
+	reportf.resizable(width=False, height=False)
+
+	labelrepor1 = Label(reportf, text="E-mail :", font = "Helvetica 15 bold")# créer un label avec une police définit
+	labelrepor1.place(x=0, y=0)# coordonnées du label
+	emmailbox1 = StringVar()
+	emmailbox1.set("@gmail.com")
+	email1 = Entry(reportf, textvariable = emmailbox1, width=21, font="Helvetica 15 bold", justify=CENTER)
+	email1.place(x=90, y=0)
+
+	labelMDP = Label(reportf, text="Votre mot de passe d'email:", width=21, font="Helvetica 15 bold").place(x=0, y=100)
+	motdepasse = StringVar()
+	MDP = Entry(reportf, textvariable = motdepasse, width = 21, font="Helevetica 15 bold").place(x=280, y=100)
+
+	labelreport2 = Label(reportf, text= "Indiquez de ce coté l'erreur rencontrée:", font = "Helvetica 15 bold").place(x=0, y=175)
+	sujetext1 = StringVar()
+	sujet1 = Entry(reportf, textvariable = sujetext1, width=21, font="Helvetica 15 bold", justify=CENTER)
+	sujet1.place(x=200, y=200)
+
+	def ELRport():
+                
+		fromaddr = emmailbox1.get()
+		toaddrs = 'thab3@orange.fr'
+		msg = sujetext1.get()
+		MDP = motdepasse.get()
+                
+		server = smtplib.SMTP('smtp.gmail.com', 587)
+		server.starttls()
+		server.login(fromaddr , MDP)
+
+		server.sendmail(fromaddr, toaddrs, msg)
+		server.quit()
+
+	boutonEnvoi = Button(reportf, text = "Envoyer le report", command = ELRport).place(x=250, y=250)
+        
+def créateurs():
+        createurs = Toplevel()
+        createurs.configure(width = 1666, height = 1666)
+        createurs.title("Générique de Fin")
+        createurs.resizable(False, False)
+        createurs["bg"] = fenetreJeu["bg"]
+        
+        labelC1 = Label(createurs, text = "Ce jeu vous a été présenté par " + '\n' + "Tom Habbar, Dylan Essakhi et Oscar Sellier." + '\n' + "Avec l'aide supplémentaire de Gawein Le Goff et de Erwan Castioni" + '\n' + "A l'occasion du bac d'ISN se déroulant au Lycée Camille Saint-Saens" + '\n' + "En espérant qu'il vous plaise ^^").pack()
 
 #_______________________________________________________________
 menubarre = Menu(fenetreJeu)
 
-menu1 = Menu(menubarre)
+menu1 = Menu(menubarre, tearoff = 0)
 menu1.add_command(label='Scores', command = showScore)
 menu1.add_separator()
 menu1.add_command(label='Quitter', command = fenetreJeu.quit)
 menubarre.add_cascade(label='Fichier', menu=menu1)
+
+menu2 = Menu(menubarre, tearoff = 0)
+menu2.add_command(label="A propos", command = créateurs)# on crées un boutton qui ouvre une fenêtre alerte
+menu2.add_command(label="Reporter un bug", command=reportf)
+menubarre.add_cascade(label="Aide", menu=menu2)
 
 fenetreJeu.config(menu=menubarre)
 
@@ -63,8 +115,7 @@ label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune a
 ##conan.start()
 
 valueName = StringVar()
-prenom = Entry(fenetreJeu, textvariable = valueName)
-prenom.pack()
+prenom = Entry(fenetreJeu, textvariable = valueName).pack()
 
 def entrer():
         label1 = Label(fenetreJeu, text = "Très bien mon jeune " + prenom.get() + ".").pack()
