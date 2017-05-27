@@ -72,6 +72,7 @@ def reportf():
 
 		server.sendmail(fromaddr, toaddrs, msg)
 		server.quit()
+		reportf.destroy()
 
 	boutonEnvoi = Button(reportf, text = "Envoyer le report", command = ELRport).place(x=250, y=250)
         
@@ -82,7 +83,8 @@ def créateurs():
         createurs.resizable(False, False)
         createurs["bg"] = fenetreJeu["bg"]
         
-        labelC1 = Label(createurs, text = "Ce jeu vous a été présenté par " + '\n' + "Tom Habbar, Dylan Essakhi et Oscar Sellier." + '\n' + "Avec l'aide supplémentaire de Gawein Le Goff et de Erwan Castioni" + '\n' + "A l'occasion du bac d'ISN se déroulant au Lycée Camille Saint-Saens" + '\n' + "En espérant qu'il vous plaise ^^").pack()
+        labelC1 = Label(createurs, text = "Ce jeu vous a été présenté par " + '\n' + "Tom Habbar, Dylan Essakhi et Oscar Sellier." + '\n' + "Avec l'aide supplémentaire de Gawein Le Goff et de Erwan Castioni" + '\n' + "A l'occasion du bac d'ISN se déroulant au Lycée Camille Saint-Saens" + '\n' + "En espérant qu'il vous plaise ^^", font="Helvetica 15 bold", justify=CENTER)
+        labelC1.pack()
 
 #_______________________________________________________________
 menubarre = Menu(fenetreJeu)
@@ -94,7 +96,7 @@ menu1.add_command(label='Quitter', command = fenetreJeu.quit)
 menubarre.add_cascade(label='Fichier', menu=menu1)
 
 menu2 = Menu(menubarre, tearoff = 0)
-menu2.add_command(label="A propos", command = créateurs)# on crées un boutton qui ouvre une fenêtre alerte
+menu2.add_command(label="A propos", command = créateurs)
 menu2.add_command(label="Reporter un bug", command=reportf)
 menubarre.add_cascade(label="Aide", menu=menu2)
 
@@ -103,11 +105,11 @@ fenetreJeu.config(menu=menubarre)
 #_______________________________________________________________
 nbMot = IntVar()
 
-label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami. Comment t'appelles-tu? ")
+label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami." + "\n" + "Comment t'appelles-tu? ", font="Helvetica 12 bold", justify=CENTER)
 label1.pack()
 
 valueName = StringVar()
-prenom = Entry(fenetreJeu, textvariable = valueName)
+prenom = Entry(fenetreJeu, textvariable = valueName, font="Helvetica 12 bold", justify=CENTER)
 prenom.pack()
 
 def entrer():
@@ -117,11 +119,11 @@ def entrer():
         bouton1.destroy()
 
 def nbDeMot(evnt):
-        label1 = Label(fenetreJeu, text = "Très bien " + valueName.get() + ".")
+        label1 = Label(fenetreJeu, text = "Très bien " + valueName.get() + ".", font="Helvetica 12 bold", justify=CENTER)
         label1.pack()
-        labelNbrMot = Label(fenetreJeu, text= "Indiquez le nombre de mots à traduire (Minimum 5).")
+        labelNbrMot = Label(fenetreJeu, text= "Indiquez le nombre de mots à traduire (Minimum 5).", font="Helvetica 12 bold", justify=CENTER)
         labelNbrMot.pack()
-        nbrMot = Entry(fenetreJeu, textvariable = nbMot)
+        nbrMot = Entry(fenetreJeu, textvariable = nbMot, font="Helvetica 12 bold", justify=CENTER)
         nbrMot.pack()
 
         def entrer2():
@@ -131,20 +133,18 @@ def nbDeMot(evnt):
                         nbrMot.destroy()
                         bouton2.destroy()
                         nbMot = nbMot.get()
-                        label3 = Label(fenetreJeu, text="Tu vas maintenant avoir " + str(nbMot) +" mots à traduire." + "\n" + "Fais attention, il n'y a pas d'accent.")
+                        label3 = Label(fenetreJeu, text="Tu vas maintenant avoir " + str(nbMot) +" mots à traduire." + "\n" + "Fais attention, il n'y a pas d'accent.", font="Helvetica 12 bold", justify=CENTER)
                         label3.pack()
                 else:
                         nbMot.set("5")
 
-        bouton2 = Button(fenetreJeu, text='Entrer', command = entrer2)
+        bouton2 = Button(fenetreJeu, text='Entrer', command = entrer2, font="Helvetica 12 bold", justify=CENTER)
         bouton2.pack()
 
-bouton1 = Button(fenetreJeu,text = 'Accepter', command = entrer)
+bouton1 = Button(fenetreJeu,text = 'Accepter', command = entrer, font="Helvetica 12 bold", justify=CENTER)
 bouton1.pack()
 bouton1.bind('<Destroy>', nbDeMot)
 
-##print("Tu vas maintenant avoir", nbMot, "mots à traduire.")
-##print("Fais attention il n'y a pas d'accent.")
 ##print("Maintenant, dans quelle langue veux-tu jouer?")
 
 def repareMot(mot):
