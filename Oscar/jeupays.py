@@ -9,9 +9,9 @@ Nbreussite=0
 copie_pays=pays
 copie_capitale=capitale
 
-prenom=input("Bonjour ! Quel est ton prénom ? ")
+prenom=input("Bonjour ! Quel est ton prénom ?")
 print("Dans ce jeu tu devras donner les capitales des pays ou régions demandées.")
-print(prenom,", n'oublie pas la majuscule au début de la ville.")
+print(prenom,"n'oublie pas la majuscule au début de la ville")
 print("Tu as trois essais pour chaque question")
 nombre=int(input("Entre le nombre de pays à deviner : "))
              
