@@ -133,6 +133,8 @@ def nbquestion4():
 menubar = Menu(windo)
 
 menu1 = Menu(menubar, tearoff=0)
+menu1.add_command(label="France")
+menu1.add_command(label="Europe")
 menu1.add_command(label="France", command = lambda : changeMode("France"))
 menu1.add_command(label="Europe", command = lambda : changeMode("Europe"))
 menu1.add_command(label = "Monde", command = lambda: changeMode("Monde"))

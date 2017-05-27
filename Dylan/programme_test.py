@@ -7,18 +7,6 @@ import time
 from time import time, sleep
 import random
 from threading import Thread
-import jeu_calcul_mental as batjeu1
-
-#--------------------------------------------------------------------------------------------------------------
-def SearchPath():
-	if getattr(sys, 'frozen', False):
-		datadir = os.path.dirname(sys.executable)
-	else:
-		datadir = os.path.dirname(__file__)
-	return datadir
-
-chemin = SearchPath()
-CheminAbsolu = os.path.join(chemin, "Chantrenninator-Translator")
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk()
 fenetre.configure(width=550, height=400)
@@ -27,17 +15,17 @@ fenetre.resizable(width=False, height=False)
 
 #--------------------------------------------------------------------------------------------------------------
 ##image menu
-textitlemenu=PhotoImage(file=os.path.join(chemin, "image/nuage_title-menu.png"))
+textitlemenu=PhotoImage(file="image/nuage_title-menu.png")
 canttml = Canvas(fenetre, width=500,height=145)
 canttml.create_image(0,0,anchor='nw', image=textitlemenu)
 canttml.place(x=115, y=20)
 
-gif_parle=PhotoImage(file=os.path.join(chemin, "image/einstein_montre.gif"))
+gif_parle=PhotoImage(file="image/einstein_montre.gif")
 can1 = Canvas(fenetre, width=120,height=135)
 can1.create_image(0,0,anchor='nw', image=gif_parle)
 can1.place(x=10, y=0)
 
-gif_parle2=PhotoImage(file=os.path.join(chemin,"image/einstein_montre.gif"))
+gif_parle2=PhotoImage(file="image/einstein_montre.gif")
 can2 = Canvas(fenetre, width=120,height=135)
 can2.create_image(0,0,anchor='nw', image=gif_parle2)
 can2.place(x=450, y=0)
@@ -99,13 +87,13 @@ menubar.add_cascade(label="Aide", menu=menu3)
 fenetre.config(menu=menubar)# on configure la barre de menu
 #--------------------------------------------------------------------------------------------------------------
 ##fonction ouverture
-#def batjeu1():
-	#os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC")
-	#os.system("jeu_calcul_mental.py")
+def batjeu1():
+	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC")
+	os.system("jeu_calcul_mental.py")
 
 #--------------------------------------------------------------------------------------------------------------
 ##bouton menu
-imageb1calc= PhotoImage(file=os.path.join(chemin,"image/nuage_title-jeu.png"))
+imageb1calc= PhotoImage(file="image/nuage_title-jeu.png")
 boutonreni=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#0076BB", image=imageb1calc, bg="#00a2ff", command=batjeu1)
 boutonreni.place(x=10, y=180)
 
