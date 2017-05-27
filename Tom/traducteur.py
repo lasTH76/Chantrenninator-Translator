@@ -21,17 +21,16 @@ fF = open(os.path.join(chemin, 'VocaFrancais.txt'), 'r')
 listfF = [line.split("/n") for line in fF.readlines()]
 listfA = [line.split("/n") for line in fA.readlines()]
 
-score = 0
-nbrEssai = 5
-choix = "Vide"
-ReponseJoueur = "mouais"
-nbMot = 0
+##score = 0
+##nbrEssai = 5
+##choix = "Vide"
+##ReponseJoueur = "mouais"
 
 #---------------------------------------------------------------
 fenetreJeu = Tk()
 fenetreJeu.title("Jeu de traduction")
 fenetreJeu["bg"] = 'blue'
-fenetreJeu.geometry("500x400+350+666")
+fenetreJeu.geometry("500x500+750+350")
 
 #_______________________________________________________________
 def showScore():
@@ -102,58 +101,73 @@ menubarre.add_cascade(label="Aide", menu=menu2)
 fenetreJeu.config(menu=menubarre)
 
 #_______________________________________________________________
-##class Destructeur(threading.Thread):
-##        def __init__(self):
-##                threading.Thread.__init__(self)
-##        def run(self):
-##                time.sleep(5)
-##                label1.destroy()
+nbMot = IntVar()
 
-label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami. Comment t'appelles-tu? ").pack()
-
-##conan = Destructeur()
-##conan.start()
+label1 = Label(fenetreJeu, text="Bienvenue dans ce jeu de traduction mon jeune ami. Comment t'appelles-tu? ")
+label1.pack()
 
 valueName = StringVar()
-prenom = Entry(fenetreJeu, textvariable = valueName).pack()
-prenom = Entry(fenetreJeu, textvariable = valueName, justify=CENTER)
+prenom = Entry(fenetreJeu, textvariable = valueName)
 prenom.pack()
 
 def entrer():
-        label1 = Label(fenetreJeu, text = "Très bien mon jeune " + prenom.get() + ".").pack()
+        global label1, prenom, bouton1
+        prenom.destroy()
+        label1.destroy()
+        bouton1.destroy()
 
-bouton1 = Button(fenetreJeu,text = 'Accepter', command = entrer).pack()
+def nbDeMot(evnt):
+        label1 = Label(fenetreJeu, text = "Très bien " + valueName.get() + ".")
+        label1.pack()
+        labelNbrMot = Label(fenetreJeu, text= "Indiquez le nombre de mots à traduire (Minimum 5).")
+        labelNbrMot.pack()
+        nbrMot = Entry(fenetreJeu, textvariable = nbMot)
+        nbrMot.pack()
 
-##while nbMot <= 4:
-##        nbMot = int(input("Indiquer le nombre de mots que vous voulez traduire -->   "))
-##        if nbMot > 0 and nbMot < 5:
-##                print("Petit Joueur.", end='\n')
-##
+        def entrer2():
+                global nbMot
+                if nbMot.get() >= 5:
+                        labelNbrMot.destroy()
+                        nbrMot.destroy()
+                        bouton2.destroy()
+                        nbMot = nbMot.get()
+                        label3 = Label(fenetreJeu, text="Tu vas maintenant avoir " + str(nbMot) +" mots à traduire." + "\n" + "Fais attention, il n'y a pas d'accent.")
+                        label3.pack()
+                else:
+                        nbMot.set("5")
+
+        bouton2 = Button(fenetreJeu, text='Entrer', command = entrer2)
+        bouton2.pack()
+
+bouton1 = Button(fenetreJeu,text = 'Accepter', command = entrer)
+bouton1.pack()
+bouton1.bind('<Destroy>', nbDeMot)
+
 ##print("Tu vas maintenant avoir", nbMot, "mots à traduire.")
 ##print("Fais attention il n'y a pas d'accent.")
 ##print("Maintenant, dans quelle langue veux-tu jouer?")
-##
-##def repareMot(mot):
-##        listeNouvMot = []
-##        ignoreSuivant = False
-##        for indLettre in range(len(mot)):
-##                if ignoreSuivant:
-##                        ignoreSuivant = False
-##                        pass
-##                elif (mot[indLettre] in ("[", "]", "'")):
-##                        pass
-##                elif mot[indLettre] == chr(92) and mot[indLettre + 1] == "n":
-##                        ignoreSuivant = True
-##                        pass
-##                else:
-##                        listeNouvMot.append(mot[indLettre])
-##        nouveauMot = "".join(listeNouvMot)
-##        nouveauMot.replace("\n", "")
-##        if nouveauMot.endswith("\n"):
-##                vraiMot = nouveauMot[:-1] #On enleve le dernier caractere (= saut de ligne) pour eviter les sauts de lignes inutiles
-##        else:
-##                vraiMot = nouveauMot
-##        return vraiMot
+
+def repareMot(mot):
+        listeNouvMot = []
+        ignoreSuivant = False
+        for indLettre in range(len(mot)):
+                if ignoreSuivant:
+                        ignoreSuivant = False
+                        pass
+                elif (mot[indLettre] in ("[", "]", "'")):
+                        pass
+                elif mot[indLettre] == chr(92) and mot[indLettre + 1] == "n":
+                        ignoreSuivant = True
+                        pass
+                else:
+                        listeNouvMot.append(mot[indLettre])
+        nouveauMot = "".join(listeNouvMot)
+        nouveauMot.replace("\n", "")
+        if nouveauMot.endswith("\n"):
+                vraiMot = nouveauMot[:-1] #On enleve le dernier caractere (= saut de ligne) pour eviter les sauts de lignes inutiles
+        else:
+                vraiMot = nouveauMot
+        return vraiMot
 ##
 ##while not choix in ("Francais", "Anglais"):
 ##        choix = input("Francais ou Anglais?    ")
