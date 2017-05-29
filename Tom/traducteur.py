@@ -1,4 +1,4 @@
-import os, random, sys, time, threading, shelve, smtplib
+﻿import os, random, sys, time, threading, shelve, smtplib
 from tkinter import *
 
 #os.chdir('C:\Python34')
@@ -176,7 +176,11 @@ def Francais():
         label2['text'] ='Il faut les traduire en français'
 
 def NouveauMot_Fr():
-        global ReponseJoueur
+        global ReponseJoueur, labelInd, labelIndic, boutonFr, boutonAn, BoutonAccRep
+	boutonAn.destroy()
+	boutonFr.destroy()
+        labelInd.destroy()
+        labelIndic.destroy()
         hasard = random.randint(0, len(listfA))
         mot = repareMot(listfA[hasard])
         reponse = repareMot(listfF[hasard])
@@ -185,9 +189,12 @@ def NouveauMot_Fr():
         labelMot.pack()
         EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 10 bold', justify=CENTER)
         EntreeRep.pack()
+	BoutonAccRep.pack()
 
 def NouveauMot_An():
-        global ReponseJoueur, labelInd, labelIndic
+        global ReponseJoueur, labelInd, labelIndic, boutonFr, boutonAn, BoutonAccRep
+	boutonAn.destroy()
+	boutonFr.destroy()
         labelInd.destroy()
         labelIndic.destroy()
         hasard = random.randint(0, len(listfA))
@@ -198,6 +205,7 @@ def NouveauMot_An():
         labelMot.pack()
         EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 10 bold', justify=CENTER)
         EntreeRep.pack()
+	BoutonAccRep.pack()
 
 def Verif_Accept():
         global ReponseJoueur, score, nbrEssai, valueName, reponse, EntreeRep, boutonFr, boutonAn
@@ -227,6 +235,10 @@ def Verif_Accept():
                         if nbrEssai == 0 and ReponseJoueur.get() != reponse:
                                 labelInd = Label(fenetreJeu, text= 'La reponse était '"'"+ reponse +"' .", font='Helvetica 10 bold', justify=CENTER)
                                 labelInd.pack()
+                                if ActAn == 1:
+                                    NouveauMot_An()
+                                elif ActFr == 1:
+                                    NouveauMot_Fr()
                 nbrEssai = 5
                 nbMot += -1
 
@@ -240,6 +252,14 @@ def Anglais():
 
 boutonFr = Button(fenetreJeu, text='Français', font='Helvetica 10 bold', command = Francais)
 boutonAn = Button(fenetreJeu, text='Anglais', font='Helvetica 10 bold', command = Anglais)
+BoutonAccRep = Button(fenetreJeu , text = "Valider?", command = Verif_Accept, font='Helvetica 10 bold', justify=CENTER)
+
+if label2.pack() == True:
+	boutonFr.pack()
+	boutonAn.pack()
+
+boutonFr.bind('<Activate>', NouveauMot_Fr() )
+boutonAn.bind('<Activate>', NouveauMot_An() )
 
 fenetreJeu.mainloop()
 fA.close()
