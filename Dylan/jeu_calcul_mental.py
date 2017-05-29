@@ -29,7 +29,7 @@ def aide():
 	labeltop1.place(x=45, y=0)# coordonnées du label
 
 def temps():
-	global tmpr, score1, t
+	global tmpr, tmp, score1, t
 	#--------------------------------------------------------------------------
 	##fonction de la fenetre temps
 	def renitial():
@@ -106,7 +106,7 @@ operateurs=["X", "+", "-"]
 t=0
 tmp=10
 tmpr=10
-brack=0
+bestscore=0
 #---------------------------------------------------------
 ##calcul
 class The_time(Thread):
@@ -166,6 +166,14 @@ def resultat(event):
 	opera1=operateurs.index(c)
 	calcul1['text'] = str(a)+str(c)+str(b)
 	reponsa.delete(0, END)
+	bestscore=score1/tmpr
+	data=float(dodo)
+	if bestscore>data:
+		bstsc1=str(bestscore)
+		fichier2=open("data/table_de_calcul.txt","w")
+		fichier2.write(bstsc1)
+		fichier2.close()
+		labelbstsore['text']="Best Score : "+str(bstsc1)+" pts/sec"
 
 def reniti1():
 	global temps1, score1, tmp, tmpr
@@ -185,7 +193,7 @@ def reniti1():
 #réponder au question avant le temps imparti
 
 tot2=Label(jeu1, text="Résultat : ", font = "Helvetica 20 bold")
-tot2.place(x=20, y=220)
+tot2.place(x=5, y=220)
 
 calcul1=Label(jeu1, text="", font = "Helvetica 20 bold")
 calcul1.place(x=120, y=80)
@@ -197,7 +205,7 @@ opera1=operateurs.index(c)
 calcul1['text'] = str(a)+str(c)+str(b)
 
 labscore=Label(jeu1, text="Point : "+str(0), font = "Helvetica 20 bold")
-labscore.place(x=20, y=260)
+labscore.place(x=5, y=260)
 
 reponse = StringVar()
 reponsa = Entry(jeu1, textvariable = reponse, width=21, font="Helvetica 15 bold", justify=CENTER)
@@ -213,10 +221,10 @@ boutonreni.place(x=180, y=180)
 temps1=Label(jeu1, text="Time : "+str(tmp), font = "Helvetica 15 bold")
 temps1.place(x=5, y=180)
 
-labelbstsore=Label(jeu1, text="Votre meilleur score :", font="Helvetica 15 bold")
-labelbstsore.place(x=30, y=290)
-
-labelbstsore1=Label(jeu1, text="", font="Helvetica 15 bold")
-labelbstsore1.place(x=50, y=315)
+fichier = open("data/table_de_calcul.txt", "r")
+dodo=fichier.read()
+labelbstsore=Label(jeu1, text="Best Score : "+str(dodo)+" pts/sec", font="Helvetica 15 bold")
+labelbstsore.place(x=5, y=300)
+fichier.close()
 
 jeu1.mainloop()

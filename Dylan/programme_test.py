@@ -5,7 +5,7 @@ import os
 import sys
 import time
 from time import time, sleep
-import random
+import random, smtplib
 from threading import Thread
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk()
@@ -49,23 +49,47 @@ def menu_graphf():
 
 def reportf():
 	reportf=Toplevel()
-	reportf.configure(width=350, height=200)
+	reportf.configure(width=600, height=300)
 	reportf.title("Reporter un bug")
 	reportf.resizable(width=False, height=False)
 
 	labelrepor1 = Label(reportf, text="E-mail :", font = "Helvetica 15 bold")# créer un label avec une police définit
-	labelrepor1.place(x=5, y=60)# coordonnées du label
+	labelrepor1.place(x=0, y=0)# coordonnées du label
 	emmailbox1 = StringVar()
-	emmail1 = Entry(reportf, textvariable = emmailbox1, width=21, font="Helvetica 15 bold", justify=CENTER)
-	emmail1.place(x=90, y=60)
+	emmailbox1.set("@gmail.com")
+	email1 = Entry(reportf, textvariable = emmailbox1, width=21, font="Helvetica 15 bold", justify=CENTER)
+	email1.place(x=90, y=0)
 
+	labelMDP = Label(reportf, text="Votre mot de passe d'email:", width=21, font="Helvetica 15 bold")
+	labelMDP.place(x=0, y=100)
+	motdepasse = StringVar()
+	MDP = Entry(reportf, textvariable = motdepasse, width = 21, font="Helevetica 15 bold", justify=CENTER)
+	MDP.place(x=280, y=100)
+
+	labelreport2 = Label(reportf, text= "Indiquez de ce coté l'erreur rencontrée:", font = "Helvetica 15 bold")
+	labelreport2.place(x=0, y=175)
 	sujetext1 = StringVar()
 	sujet1 = Entry(reportf, textvariable = sujetext1, width=21, font="Helvetica 15 bold", justify=CENTER)
-	sujet1.place(x=5, y=100)
+	sujet1.place(x=200, y=200)
 
-	fromaddr = emmailbox1
-	toaddrs  = 'dylan.wolverine@gmail.com'
-	msg = sujetext1
+	def ELRport():
+                
+		fromaddr = emmailbox1.get()
+		toaddrs = 'dylan.e@hotmail.fr'
+		msg = sujetext1.get()
+		MDP = motdepasse.get()
+                
+		server = smtplib.SMTP('smtp.gmail.com', 235)
+		server.ehlo()
+		server.starttls()
+		server.login(fromaddr , MDP)
+
+		server.sendmail(fromaddr, toaddrs, msg)
+		server.close()
+		reportf.destroy()
+
+	boutonEnvoi = Button(reportf, text = "Envoyer le report", command = ELRport)
+	boutonEnvoi.place(x=250, y=250)
 
 #--------------------------------------------------------------------------------------------------------------
 ##menubar menu
