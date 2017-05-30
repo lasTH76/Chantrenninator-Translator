@@ -109,10 +109,10 @@ def Accepter(evnt):
 
 EntreePrenom.bind('<KeyPress-Return>', Accepter)
 
-##        print("You'll have to translate a random letter, number or ponctuation mark into Morse code")
-##        number = int(input("Now select the number of characters you want to translate -->	    "))
-##        print("It's time to start!")
-##        print("")
+print("You'll have to translate a random letter, number or ponctuation mark into Morse code")
+number = int(input("Now select the number of characters you want to translate -->	    "))
+print("It's time to start!")
+print("")
 ##
 ##        for loop in range(number):
 ##                letter = random.randint(33,90)
@@ -137,6 +137,6 @@ EntreePrenom.bind('<KeyPress-Return>', Accepter)
 ##                        print("")
 ##
 ##        print(prenom, "has", result, "over", number, ".")
-
-if __name__ == '__main__':
-        morse()
+##
+##if __name__ == '__main__':
+##        morse()
