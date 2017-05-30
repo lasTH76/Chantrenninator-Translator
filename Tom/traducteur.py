@@ -102,6 +102,8 @@ nbMot = IntVar()
 score = 0
 nbrEssai = 5
 ReponseJoueur = StringVar()
+actAn = 0
+actFr = 0
 
 def repareMot(mot):
     listeNouvMot = []
@@ -153,7 +155,8 @@ def nbDeMot(evnt):
                     labelNbrMot.destroy()
                     nbrMot.destroy()
                     bouton2.destroy()
-                    nbMot = nbMot.get()
+                    tempMot = nbMot.get()
+                    nbMot = int(tempMot)
                     label3 = Label(fenetreJeu, text='Tu vas maintenant avoir ' + str(nbMot) +' mots à traduire.' + '\n' + "Fais attention, il n'y a pas d'accent.", font='Helvetica 10 bold', justify=CENTER)
                     label3.pack()
                     label2.pack()
@@ -170,17 +173,19 @@ bouton1.bind('<Destroy>', nbDeMot)
 label2 = Label(fenetreJeu, text='Maintenant, dans quelle langue veux-tu jouer?', font='Helvetica 10 bold', justify=CENTER)
 
 def Francais():
-    global boutonFr, boutonAn, label2
+    global boutonFr, boutonAn, label2, actFr
     boutonFr.destroy()
     boutonAn.destroy()
+    actFr = 1
     label2['text'] ='Il faut les traduire en français'
+    NouveauMot_Fr()
 
 def NouveauMot_Fr():
-    global ReponseJoueur, labelInd, labelIndic, boutonFr, boutonAn, BoutonAccRep
+    global ReponseJoueur, boutonFr, boutonAn, BoutonAccRep, reponse
     boutonAn.destroy()
     boutonFr.destroy()
-    labelInd.destroy()
-    labelIndic.destroy()
+##    labelInd.destroy()
+##    labelIndic.destroy()
     hasard = random.randint(0, len(listfA))
     mot = repareMot(listfA[hasard])
     reponse = repareMot(listfF[hasard])
@@ -192,11 +197,11 @@ def NouveauMot_Fr():
     BoutonAccRep.pack()
 
 def NouveauMot_An():
-    global ReponseJoueur, labelInd, labelIndic, boutonFr, boutonAn, BoutonAccRep
+    global ReponseJoueur, boutonFr, boutonAn, BoutonAccRep, reponse
     boutonAn.destroy()
     boutonFr.destroy()
-    labelInd.destroy()
-    labelIndic.destroy()
+##    labelInd.destroy()
+##    labelIndic.destroy()
     hasard = random.randint(0, len(listfA))
     mot = repareMot(listfF[hasard])
     reponse = repareMot(listfA[hasard])
@@ -208,47 +213,46 @@ def NouveauMot_An():
     BoutonAccRep.pack()
 
 def Verif_Accept():
-    global ReponseJoueur, score, nbrEssai, valueName, reponse, EntreeRep, boutonFr, boutonAn
-    ActAn = boutonAn.bind('<Activate>', ActAn = 1)
-    ActFr = boutonFr.bind('<Activate>', ActFr = 1)
+    global ReponseJoueur, score, nbrEssai, valueName, reponse, EntreeRep, boutonFr, boutonAn, nbMot
     if nbMot == 0:
             labelInd.destroy()
             labelIndic.destroy()
             labelInd.destroy()
             EntreeRep.destroy()
-            labelRep = Label(fenetreJeu, text = valueName.get() + ',vous avez un score de' + score + 'sur' + nbMot, font = 'Helvetica 10 bold', justify=CENTER)
+            labelRep = Label(fenetreJeu, text = valueName.get() + ',vous avez un score de' + str(score) + 'sur' + nbMot, font = 'Helvetica 10 bold', justify=CENTER)
             labelRep.pack()
     else:
             while ReponseJoueur.get() != reponse and nbrEssai > 0:
                     if ReponseJoueur.get() != reponse:
                             nbrEssai += -1
-                            labelIndic = Label(fenetreJeu, text='Il te reste' + nbrEssai + 'essais.', font = 'Helvetica 10 bold', justify=CENTER)
+                            labelIndic = Label(fenetreJeu, text='Il te reste' + str(nbrEssai) + 'essais.', font = 'Helvetica 10 bold', justify=CENTER)
                             labelIndic.pack()
                     if ReponseJoueur.get() == reponse and nbrEssai >= 0:
                             score += 1
                             labelIndic = Label(fenetreJeu, text= 'Ceci est la bonne réponse!', font = 'Helvetica 10 bold', justify=CENTER)
                             labelIndic.pack()
-                            if ActAn == 1:
+                            if actAn == 1:
                                 NouveauMot_An()
-                            elif ActFr == 1:
+                            elif actFr == 1:
                                 NouveauMot_Fr()
                     if nbrEssai == 0 and ReponseJoueur.get() != reponse:
-                            labelInd = Label(fenetreJeu, text= 'La reponse était '"'"+ reponse +"' .", font='Helvetica 10 bold', justify=CENTER)
+                            labelInd = Label(fenetreJeu, text= 'La reponse était "'+ reponse +"' .", font='Helvetica 10 bold', justify=CENTER)
                             labelInd.pack()
-                            if ActAn == 1:
+                            if actAn == 1:
                                 NouveauMot_An()
-                            elif ActFr == 1:
+                            elif actFr == 1:
                                 NouveauMot_Fr()
             nbrEssai = 5
-            nbMot += -1
+            nbMot -= 1
 
 
 def Anglais():
-    global boutonFr, boutonAn, label2
+    global boutonFr, boutonAn, label2, actAn
     boutonFr.destroy()
     boutonAn.destroy()
+    actAn = 1
     label2['text']='Il faut les traduire en anglais'
-
+    NouveauMot_An()
 
 boutonFr = Button(fenetreJeu, text='Français', font='Helvetica 10 bold', command = Francais)
 boutonAn = Button(fenetreJeu, text='Anglais', font='Helvetica 10 bold', command = Anglais)
@@ -258,8 +262,8 @@ if label2.pack() == True:
     boutonFr.pack()
     boutonAn.pack()
 
-boutonFr.bind('<Activate>', NouveauMot_Fr() )
-boutonAn.bind('<Activate>', NouveauMot_An() )
+boutonFr.bind('<Activate>', NouveauMot_Fr )
+boutonAn.bind('<Activate>', NouveauMot_An )
 
 fenetreJeu.mainloop()
 fA.close()
