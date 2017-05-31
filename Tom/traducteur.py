@@ -29,8 +29,7 @@ fenetreJeu.geometry('500x500+750+350')
 
 #_______________________________________________________________
 def showScore():
-    HScore = shelve.open('score.txt')
-    score = HScore['score']
+    pass
             
 def reportf():
     reportf=Toplevel()
@@ -249,6 +248,7 @@ def Verif_Accept():
                 ReponseJoueur.set('')
                 nbrEssai = 5
                 nbMot -= 1
+                labelIndic.bind('<Any-KeyPress>')
                 if actAn == 1:
                     NouveauMot_An()
                 elif actFr == 1:
@@ -259,6 +259,7 @@ def Verif_Accept():
                 ReponseJoueur.set('')
                 nbrEssai = 5
                 nbMot -= 1
+                labelIndic.bind('<Any-KeyPress>')
                 if actAn == 1:
                     NouveauMot_An()
                 elif actFr == 1:

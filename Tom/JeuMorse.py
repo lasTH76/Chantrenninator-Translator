@@ -102,40 +102,55 @@ EntreePrenom = Entry(fenetreJeu2, textvariable = ValeurPrenom, font='Helvetica 1
 EntreePrenom.pack()
 
 def Accepter(evnt):
-        global ValeurPrenom, prenom, EntreePrenom
+        global ValeurPrenom, prenom, EntreePrenom, label1, label2, EntreeNbr
         ValPrenom = ValeurPrenom.get()
         prenom.destroy()
         EntreePrenom.destroy()
+        label1.pack()
+        label2.pack()
+        EntreeNbr.pack()
 
 EntreePrenom.bind('<KeyPress-Return>', Accepter)
 
-print("You'll have to translate a random letter, number or ponctuation mark into Morse code")
-number = int(input("Now select the number of characters you want to translate -->	    "))
-print("It's time to start!")
-print("")
-##
-##        for loop in range(number):
-##                letter = random.randint(33,90)
-##                while (letter > 34 and letter < 39) or (letter > 41 and letter < 44) or (letter > 46 and letter < 48) or (letter > 59 and letter < 63) or (letter > 63 and letter < 65):
-##                        letter = random.randint(33,90)
-##                goodanswer = Morse[chr(letter).upper()]
-##                Try = 3
-##                
-##                print(chr(letter))
-##                
-##                while answer != goodanswer and Try > 0:
-##                        answer = input()
-##                        if answer != goodanswer:
-##                                Try += -1
-##                                print(Try, "attempt left.")
-##                if answer == goodanswer:
-##                        result += 1
-##                        print("Good answer")
-##                        print("")
-##                if Try == 0 and answer != goodanswer:
-##                        print("The answer was", goodanswer, ".")
-##                        print("")
-##
+label1 = Label(fenetreJeu2, text ="Vous devez traduire une lettre, un chiffre ou un signe de ponctuation choisi au hasard en code Morse.", font='Helvetica 12 bold', justify=CENTER)
+number = IntVar()
+label2 = Label(fenetreJeu2, text ="Maintenant, sélectionnez le nombre de caractères à traduire", font='Helvetica 12 bold', justify=CENTER)
+EntreeNbr = Entry(fenetreJeu2, textvariable = number, font='Helvetica 12 bold', justify=CENTER)
+
+def Accepter_2(evnt):
+    global label1, label2, label3, EntreeNbr
+    label1.destroy()
+    label2.destroy()
+    EntreeNbr.destroy()
+    label3.pack()
+
+label3 = Label(fenetreJeu2, text = "It's time to start!" + '\n', font='Helvetica 12 bold', justify=CENTER)
+label3.bind('<KeyPress-Return>', Accepter_2)
+nombre = number.get()
+
+for loop in range(nombre):
+        letter = random.randint(33,90)
+        while (letter > 34 and letter < 39) or (letter > 41 and letter < 44) or (letter > 46 and letter < 48) or (letter > 59 and letter < 63) or (letter > 63 and letter < 65):
+                letter = random.randint(33,90)
+        goodanswer = Morse[chr(letter).upper()]
+        Try = 3
+        
+        labelMot = Label(fenetreJeu2, text = chr(letter), font='Helvetica 12 bold', justify=CENTER)
+        labelMot.pack()
+
+        def AccpterRep(event):
+            if answer != goodanswer and Try > 0:
+                Indication.destroy()
+                Try += -1
+                Indication = Label(fenetreJeu2, text = Try + " essai(s) restant(s).", font='Helvetica 12 bold', justify=CENTER)
+                Indication.pack()
+            if answer.get() == goodanswer:
+                    result += 1
+                    BonneRep = Label(fenetreJeu2, text ="Bonne réponse!", font='Helvetica 12 bold', justify=CENTER)
+                    BonneRep.pack()
+            if Try == 0 and answer.get() != goodanswer:
+                    MauvaiseRep = Label(fenetreJeu2, text = "La réponse était " + goodanswer + ".", font='Helvetica 12 bold', justify=CENTER)
+                    MauvaiseRep.pack()
 ##        print(prenom, "has", result, "over", number, ".")
 ##
 ##if __name__ == '__main__':
