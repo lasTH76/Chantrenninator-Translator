@@ -3,7 +3,7 @@ from tkinter import *
 
 #os.chdir('C:\Python34')
 
-def SearchPath():
+def SearchPath():                                       #je crée une fonction qui me permet de trouver un dossier dans n'importe quel fichier
     if getattr(sys, 'frozen', False):
         datadir = os.path.dirname(sys.executable)
     else:
@@ -13,25 +13,24 @@ def SearchPath():
 #--------------------------------------------------------------
 
 chemin = SearchPath()
-CheminAbsolu = os.path.join(chemin, 'Chantrenninator-Translator')
 
-fA = open(os.path.join(chemin, 'VocaAnglais.txt'), 'r')
+fA = open(os.path.join(chemin, 'VocaAnglais.txt'), 'r')             #je lui demande d'ouvrir le fichier .txt en faisant en sorte qu'il le retrouve avant de le lire
 fF = open(os.path.join(chemin, 'VocaFrancais.txt'), 'r')
 
-listfF = [line.split('/n') for line in fF.readlines()]
+listfF = [line.split('/n') for line in fF.readlines()]              #je lui demande de créer une liste à chaque fois qu'il y a un saut de ligne dans le fichier .txt
 listfA = [line.split('/n') for line in fA.readlines()]
 
 #---------------------------------------------------------------
 fenetreJeu = Tk()
 fenetreJeu.title('Jeu de traduction')
-fenetreJeu['bg'] = 'grey'
-fenetreJeu.geometry('500x500+750+350')
+fenetreJeu['bg'] = 'grey'                   #je crée une fenêtre en lui donnant un nom et un fond
+fenetreJeu.geometry('500x500+750+350')      #je place la fenêtre à l'écran et je paramètre sa taille
 
 #_______________________________________________________________
-def showScore():
+def showScore():            #Fonction à venir qui permettra de voir les precédants scores
     pass
             
-def reportf():
+def reportf():              #Fonction qui permet d'envoyer le problème qu'un utilisateur peut rencontrer vers une adresse mail de l'équipe de programmation
     reportf=Toplevel()
     reportf.configure(width=600, height=300)
     reportf.title('Reporter un bug')
@@ -53,7 +52,7 @@ def reportf():
     sujet1 = Entry(reportf, textvariable = sujetext1, width=21, font='Helvetica 15 bold', justify=CENTER)
     sujet1.place(x=200, y=200)
 
-    def ELRport():
+    def ELRport():          #Sous-Fonction qui prend le texte, l'adresse mail et le mot de passe pour envoyer le problème
                 
         fromaddr = emmailbox1.get()
         toaddrs = 'thab3@orange.fr'
@@ -70,7 +69,7 @@ def reportf():
 
     boutonEnvoi = Button(reportf, text = 'Envoyer le report', command = ELRport).place(x=250, y=250)
         
-def créateurs():
+def créateurs():            #Ni plus ni moins que les crédits du programme
     createurs = Toplevel()
     createurs.configure(width = 1666, height = 1666)
     createurs.title('Générique de Fin')
@@ -81,7 +80,7 @@ def créateurs():
     labelC1.pack()
 
 #_______________________________________________________________
-menubarre = Menu(fenetreJeu)
+menubarre = Menu(fenetreJeu)            #On va ici créer le menu du jeu
 
 menu1 = Menu(menubarre, tearoff = 0)
 menu1.add_command(label='Scores', command = showScore)
@@ -98,16 +97,17 @@ fenetreJeu.config(menu=menubarre)
 
 #_______________________________________________________________
 nbMot = IntVar()
-score = 0
-nbrEssai = 5
+score = 1
+nbrEssai = 4
 ReponseJoueur = StringVar()
 actAn = 0
 actFr = 0
 labelMot = Label(fenetreJeu)
-labelInd = Label(fenetreJeu)
 labelIndic = Label(fenetreJeu)
 EntreeRep = Entry(fenetreJeu)
 BoutonAccRep = Button(fenetreJeu)
+compteurMot = 0
+label3 = Label(fenetreJeu)
 
 def repareMot(mot):
     listeNouvMot = []
@@ -185,86 +185,7 @@ def Francais():
     label2['text'] ='Il faut les traduire en français'
     labelVide = Label(fenetreJeu, text = '', font='Helvetica 12 bold', justify=CENTER, bg = fenetreJeu['bg'])
     labelVide.pack()
-    NouveauMot_Fr()
-
-def NouveauMot_Fr():
-    global ReponseJoueur, boutonFr, boutonAn, reponse, labelInd, labelIndic, labelMot, EntreeRep, BoutonAccRep
-    boutonAn.destroy()
-    boutonFr.destroy()
-    labelInd.destroy()
-    labelIndic.destroy()
-    labelMot.destroy()
-    EntreeRep.destroy()
-    BoutonAccRep.destroy()
-    hasard = random.randint(0, len(listfA))
-    mot = repareMot(listfA[hasard])
-    reponse = repareMot(listfF[hasard])
-    reponse.lower()
-    labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)
-    labelMot.pack()
-    EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
-    EntreeRep.pack()
-    BoutonAccRep = Button(fenetreJeu , text = "Valider?", command = Verif_Accept, font='Helvetica 12 bold', justify=CENTER)
-    BoutonAccRep.pack()
-
-def NouveauMot_An():
-    global ReponseJoueur, boutonFr, boutonAn, reponse, labelInd, labelIndic, labelMot, EntreeRep, BoutonAccRep
-    boutonAn.destroy()
-    boutonFr.destroy()
-    labelMot.destroy()
-    EntreeRep.destroy()
-    BoutonAccRep.destroy()
-    hasard = random.randint(0, len(listfA))
-    mot = repareMot(listfF[hasard])
-    reponse = repareMot(listfA[hasard])
-    reponse.lower()
-    labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)
-    labelMot.pack()
-    EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
-    EntreeRep.pack()
-    BoutonAccRep = Button(fenetreJeu , text = "Valider?", command = Verif_Accept, font='Helvetica 12 bold', justify=CENTER)
-    BoutonAccRep.pack()
-
-def Verif_Accept():
-    global ReponseJoueur, score, nbrEssai, valueName, reponse, EntreeRep, boutonFr, boutonAn, nbMot, labelInd, labelIndic, EntreeRep, tempMot
-    if nbMot == 0:
-        nbMot = int(tempMot)
-        labelInd.destroy()
-        labelIndic.destroy()
-        labelInd.destroy()
-        EntreeRep.destroy()
-        labelRep = Label(fenetreJeu, text = valueName.get() + ',vous avez un score de' + str(score) + 'sur' + str(nbMot), font = 'Helvetica 12 bold', justify=CENTER)
-        labelRep.pack()
-    else:
-        if ReponseJoueur.get() != reponse:
-                nbrEssai -= 1
-                labelIndic = Label(fenetreJeu, text='Il te reste ' + str(nbrEssai) + ' essais.', font = 'Helvetica 12 bold', justify=CENTER)
-                labelIndic.pack()
-                ReponseJoueur.set('')
-        if ReponseJoueur.get() == reponse and nbrEssai > 0:
-                score += 1
-                labelIndic = Label(fenetreJeu, text= 'Ceci est la bonne réponse!', font = 'Helvetica 12 bold', justify=CENTER)
-                labelIndic.pack()
-                ReponseJoueur.set('')
-                nbrEssai = 5
-                nbMot -= 1
-                labelIndic.bind('<Any-KeyPress>')
-                if actAn == 1:
-                    NouveauMot_An()
-                elif actFr == 1:
-                    NouveauMot_Fr()
-        if nbrEssai == 0 and ReponseJoueur.get() != reponse:
-                labelInd = Label(fenetreJeu, text= "La reponse était '" + str(reponse) + "' .", font='Helvetica 12 bold', justify=CENTER)
-                labelInd.pack()
-                ReponseJoueur.set('')
-                nbrEssai = 5
-                nbMot -= 1
-                labelIndic.bind('<Any-KeyPress>')
-                if actAn == 1:
-                    NouveauMot_An()
-                elif actFr == 1:
-                    NouveauMot_Fr()
-
+    Game()
 
 def Anglais():
     global boutonFr, boutonAn, label2, actAn
@@ -274,18 +195,76 @@ def Anglais():
     label2['text']='Il faut les traduire en anglais'
     labelVide = Label(fenetreJeu, text = '', font='Helvetica 12 bold', justify=CENTER, bg = fenetreJeu['bg'])
     labelVide.pack()
-    NouveauMot_An()
+    Game()
+
+def Game():
+    global nbMot, actAn, actFr, labelMot, EntreeRep, nbMot, valueName, score, compteurMot, label2, label3
+    def Accept(event):
+        global ReponseJoueur, score, nbrEssai, labelIndic
+        labelIndic.destroy()
+        if ReponseJoueur.get() != reponse:
+            labelIndic = Label(fenetreJeu, text='Il te reste ' + str(nbrEssai) + ' essais.', font = 'Helvetica 12 bold', justify=CENTER)
+            labelIndic.pack()
+            ReponseJoueur.set('')
+            nbrEssai -= 1
+        if ReponseJoueur.get() == reponse and nbrEssai > 0:
+            score += 1
+            labelIndic = Label(fenetreJeu, text= 'Ceci est la bonne réponse!', font = 'Helvetica 12 bold', justify=CENTER)
+            labelIndic.pack()
+            ReponseJoueur.set('')
+            nbrEssai = 4
+            time.sleep(0.5)
+            labelIndic.destroy()
+            Game()
+        if nbrEssai == -1 and ReponseJoueur.get() != reponse:
+            labelIndic.destroy()
+            labelIndic = Label(fenetreJeu, text= "La reponse était '" + str(reponse) + "' .", font='Helvetica 12 bold', justify=CENTER)
+            labelIndic.pack()
+            ReponseJoueur.set('')
+            nbrEssai = 4
+            time.sleep(1)
+            labelIndic.destroy()
+            Game()
+
+    labelIndic.destroy()
+    labelMot.destroy()
+    EntreeRep.destroy()
+    compteurMot += 1
+    if actFr == 1 and nbMot!=compteurMot:
+        hasard = random.randint(0, len(listfA))
+        mot = repareMot(listfA[hasard])
+        reponse = repareMot(listfF[hasard])
+        reponse.lower()
+        labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)
+        labelMot.pack()
+        EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
+        EntreeRep.pack()
+        EntreeRep.bind('<KeyPress-Return>', Accept)
+    if actAn == 1 and nbMot!=compteurMot:
+        hasard = random.randint(0, len(listfA))
+        mot = repareMot(listfF[hasard])
+        reponse = repareMot(listfA[hasard])
+        reponse.lower()
+        labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)
+        labelMot.pack()
+        EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
+        EntreeRep.pack()
+        EntreeRep.bind('<KeyPress-Return>', Accept)
+    if nbMot == compteurMot:
+        labelIndic.destroy()
+        labelMot.destroy()
+        EntreeRep.destroy()
+        label2.destroy()
+        label3.destroy()
+        labelRep = Label(fenetreJeu, text = valueName.get() + ', vous avez un score de ' + str(score) + ' sur ' + str(nbMot), font = 'Helvetica 12 bold', justify=CENTER)
+        labelRep.pack()
 
 boutonFr = Button(fenetreJeu, text='Français', font='Helvetica 12 bold', command = Francais)
 boutonAn = Button(fenetreJeu, text='Anglais', font='Helvetica 12 bold', command = Anglais)
 
-boutonFr.bind('<Activate>', NouveauMot_Fr )
-boutonAn.bind('<Activate>', NouveauMot_An )
+boutonFr.bind('<Activate>', Game )
+boutonAn.bind('<Activate>', Game )
 
 fenetreJeu.mainloop()
 fA.close()
 fF.close()
-time.sleep(1)
-
-if __name__ == '__main__':
-        trad()
