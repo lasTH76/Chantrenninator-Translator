@@ -1,7 +1,7 @@
 ##nous importons les modules qui nous permettrons de créer la fenêtre et d'utiliser le temps.
 from tkinter import *
 import tkinter as tk
-from tkinter.messagebox import *
+from tkinter.messagebox import * #permet d'afficher des fenêtres d'alerte.
 from time import time, sleep #sleep permet de mettre en pause le programme (ou une fonction) pendant un certain temps.
 from threading import Thread #permet d'éxecuter des tâches multiples en même temps.
 import os, sys, random #permet d'utliser les commandes systèmes (comme l'utilisation de fichier exterieur) et le random sert à demander au système de choisir un nombre aléatoire.
@@ -20,12 +20,7 @@ canttl.place(x=45, y=10) #Cette commande permet de placer l'image sur la fenêtr
 #-----------------------------------------------------
 ##fenêtre top level
 def aide():
-	top1=Toplevel() #Permet de créer une fenêtre au dessus de la principale
-	top1.configure(width=350,height=200) #On régle la taille de la fenêtre
-	top1.title("Aide") #On donne un nom à notre fenêtre
-	top1.resizable(width=False, height=False) #Fonction qui évite le redimensionnement
-	labeltop1 = Label(top1, text="Utilisation du jeu", font = "Helvetica 22 bold") #Créer un label avec une police définit
-	labeltop1.place(x=45, y=0) #Coordonnées du label
+	showinfo("Aide", "Pour commencer à jouer il suffit d'utiliser la touche Entrez!") #On crée une fenêtre alerte pour aider l'utilisateur.
 
 def temps():
 	global tmpr, tmp, score1, t #Cela permet d'utiliser une variable qui se trouve en dehors de la fonction
