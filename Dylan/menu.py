@@ -5,7 +5,7 @@ import time, random, sys, os, smtplib
 from time import time, sleep
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk() #Cela permet de créer la fenêtre graphique
-fenetre.configure(width=550, height=400) #Cela permet de configure la taille de la fenêtre en pixels.
+fenetre.configure(width=550, height=350) #Cela permet de configure la taille de la fenêtre en pixels.
 fenetre.title("Jeux de réflexion et de logique") #Cela permet de donner un titre à la fenêtre (dans ce cas là le titre de la fenêtre est "Jeux de réflexion et de logique").
 fenetre.resizable(width=False, height=False) #Cela permet d'éviter que l'utilisateur redimensionne la fenêtre comme il le souhaîte.
 
@@ -107,11 +107,32 @@ def batjeu1():
 	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
 	os.popen("jeu_calcul_mental.py") #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
 
+def batjeu2():
+	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
+
+
+def batjeu3():
+	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
+
+def batjeu4():
+	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
 
 #--------------------------------------------------------------------------------------------------------------
 ##bouton menu
-imageb1calc= PhotoImage(file="image/nuage_title-jeu.png") #Importe d'une image dans une variable
-boutonreni=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#0076BB", image=imageb1calc, bg="#00a2ff", command=batjeu1)
-boutonreni.place(x=10, y=180) #Coordonnées du bouton
+imageb1calc= PhotoImage(file="image/nuage_menu_title-jeu1.png") #Importe d'une image dans une variable
+boutonreni=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#0076BB", image=imageb1calc, bg="#00a2ff", command=batjeu1) #Création d'un bouton avec une image en fond.
+boutonreni.place(x=70, y=180) #Coordonnées du bouton
+
+imageb2calc= PhotoImage(file="image/nuage_menu_title-morse2.png") #Importe d'une image dans une variable
+boutonreni2=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#c50404", image=imageb2calc, bg="#f50000", command=batjeu2) #Création d'un bouton avec une image en fond.
+boutonreni2.place(x=300, y=180) #Coordonnées du bouton
+
+imageb3calc= PhotoImage(file="image/nuage_menu_title-capitale.png") #Importe d'une image dans une variable
+boutonreni3=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#009904", image=imageb3calc, bg="#00d205", command=batjeu3) #Création d'un bouton avec une image en fond.
+boutonreni3.place(x=70, y=250) #Coordonnées du bouton
+
+imageb4calc= PhotoImage(file="image/nuage_menu_title-trad.png") #Importe d'une image dans une variable
+boutonreni3=Button(fenetre, text="", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#ca4700", image=imageb4calc, bg="#ff5a00", command=batjeu4) #Création d'un bouton avec une image en fond.
+boutonreni3.place(x=300, y=250) #Coordonnées du bouton
 
 fenetre.mainloop()

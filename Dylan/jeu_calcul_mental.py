@@ -18,7 +18,7 @@ canttl.create_image(0,0,anchor='nw', image=textitle) #Cette commande permet de c
 canttl.place(x=45, y=10) #Cette commande permet de placer l'image sur la fenêtre avec un système de coordonnée.
 
 #-----------------------------------------------------
-##9000
+##fenêtre top level
 def aide():
 	top1=Toplevel() #Permet de créer une fenêtre au dessus de la principale
 	top1.configure(width=350,height=200) #On régle la taille de la fenêtre
