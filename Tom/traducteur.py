@@ -96,7 +96,7 @@ menubarre.add_cascade(label='Aide', menu=menu2)
 fenetreJeu.config(menu=menubarre)
 
 #_______________________________________________________________
-nbMot = IntVar()
+nbMot = IntVar()                        #ici se trouve toutes les variables dont j'aurais besoin par la suite
 score = 1
 nbrEssai = 4
 ReponseJoueur = StringVar()
@@ -108,20 +108,21 @@ EntreeRep = Entry(fenetreJeu)
 BoutonAccRep = Button(fenetreJeu)
 compteurMot = 0
 label3 = Label(fenetreJeu)
+labelVide2 = Label(fenetreJeu)
 
-def repareMot(mot):
-    listeNouvMot = []
+def repareMot(mot):                     #Cette fonction permet d'extraire le mot de la liste venant des fichiers .txt
+    listeNouvMot = []                   #On crée d'abord une liste vide
     ignoreSuivant = False
-    for indLettre in range(len(mot)):
+    for indLettre in range(len(mot)):   #Pour chaque caractère contenu dans un mot, on lui demande:
             if ignoreSuivant:
-                    ignoreSuivant = False
+                    ignoreSuivant = False   #S'il n'y a rien à faire, de passer.
                     pass
-            elif (mot[indLettre] in ("[", "]", "'")):
+            elif (mot[indLettre] in ("[", "]", "'")):   #S'il y a un de ces caractères, de passer aussi et de ne pas l'inclure dans un mot
                     pass
-            elif mot[indLettre] == chr(92) and mot[indLettre + 1] == "n":
+            elif mot[indLettre] == chr(92) and mot[indLettre + 1] == "n":   #Si le n et le séparateur \ sont présents, de passer en ignorant ces deux caractères combinés
                     ignoreSuivant = True
                     pass
-            else:
+            else:                       #Sinon, la fonction applique à la liste vide chaque lettre qu'il va séparer par des guillemets quand il y aura un saut de ligne
                     listeNouvMot.append(mot[indLettre])
     nouveauMot = "".join(listeNouvMot)
     nouveauMot.replace("\n", "")
@@ -131,20 +132,20 @@ def repareMot(mot):
             vraiMot = nouveauMot
     return vraiMot
 
-label1 = Label(fenetreJeu, text='Bienvenue dans ce jeu de traduction mon jeune ami.' + '\n' + "Comment t'appelles-tu? ", font='Helvetica 12 bold', justify=CENTER)
-label1.pack()
+label1 = Label(fenetreJeu, text='Bienvenue dans ce jeu de traduction mon jeune ami.' + '\n' + "Comment t'appelles-tu? ", font='Helvetica 12 bold', justify=CENTER) #On crée" un premier label (=texte sous Tkinter) avec une police d'écriture et un placement défini
+label1.pack()       #On place ce premier label
 
-valueName = StringVar()
-prenom = Entry(fenetreJeu, textvariable = valueName, font='Helvetica 12 bold', justify=CENTER)
+valueName = StringVar()     #On indique que la variable valueName est une zone d'entrée de texte
+prenom = Entry(fenetreJeu, textvariable = valueName, font='Helvetica 12 bold', justify=CENTER)  #On crée une zone pour écrire dans la variable valueName
 prenom.pack()
 
-def entrer():
+def entrer():       #on crée une fonction qui sert juste à supprimer les trois zones de texte, variable ou fixe.
     global label1, prenom, bouton1
     prenom.destroy()
     label1.destroy()
     bouton1.destroy()
 
-def nbDeMot(evnt):
+def nbDeMot(evnt):          #On crée une seconde fonction qui va changer le texte affiché et demandé le nombre de mots à traduire
     label1 = Label(fenetreJeu, text = 'Très bien ' + valueName.get() + '.', font='Helvetica 12 bold', justify=CENTER)
     label1.pack()
     labelNbrMot = Label(fenetreJeu, text= 'Indiquez le nombre de mots à traduire (Minimum 5).', font='Helvetica 12 bold', justify=CENTER)
@@ -152,15 +153,14 @@ def nbDeMot(evnt):
     nbrMot = Entry(fenetreJeu, textvariable = nbMot, font='Helvetica 12 bold', justify=CENTER)
     nbrMot.pack()
 
-    def entrer2():
+    def entrer2():          #On crée une sous-fonction qui va servir à vérifier si le nombre choisi est supérieur ou non à 5
             global nbMot, label2, boutonFr, boutonAn
             if nbMot.get() >= 5:
                     label1.destroy()
                     labelNbrMot.destroy()
                     nbrMot.destroy()
                     bouton2.destroy()
-                    tempMot = nbMot.get()
-                    nbMot = int(tempMot)
+                    nbMot = nbMot.get()
                     label3 = Label(fenetreJeu, text='Tu vas maintenant avoir ' + str(nbMot) +' mots à traduire.' + '\n' + "Fais attention, il n'y a pas d'accent.", font='Helvetica 12 bold', justify=CENTER)
                     label3.pack()
                     label2 = Label(fenetreJeu, text='Maintenant, dans quelle langue veux-tu jouer?', font='Helvetica 12 bold', justify=CENTER)
@@ -174,20 +174,20 @@ def nbDeMot(evnt):
 
 bouton1 = Button(fenetreJeu,text = 'Entrer', command = entrer, font='Helvetica 12 bold', justify=CENTER)
 bouton1.pack()
-bouton1.bind('<Destroy>', nbDeMot)
+bouton1.bind('<Destroy>', nbDeMot)          #Dès que le bouton 1 est détruit, on appelle la fonction nbDeMot
 
 
-def Francais():
+def Francais():             #Cette fonction sert à changer le texte du label2 puis de lancer le jeu pour le mode français
     global boutonFr, boutonAn, label2, actFr
     boutonFr.destroy()
     boutonAn.destroy()
-    actFr = 1
+    actFr = 1             #Cette variable sert à savoir quel bouton le joueur a pressé, en l'occurence le bouton FR. 
     label2['text'] ='Il faut les traduire en français'
     labelVide = Label(fenetreJeu, text = '', font='Helvetica 12 bold', justify=CENTER, bg = fenetreJeu['bg'])
     labelVide.pack()
     Game()
 
-def Anglais():
+def Anglais():              #Même chose que pour la fonction au-dessus, mais pour l'anglais
     global boutonFr, boutonAn, label2, actAn
     boutonFr.destroy()
     boutonAn.destroy()
@@ -199,47 +199,50 @@ def Anglais():
 
 def Game():
     global nbMot, actAn, actFr, labelMot, EntreeRep, nbMot, valueName, score, compteurMot, label2, label3
-    def Accept(event):
-        global ReponseJoueur, score, nbrEssai, labelIndic
-        labelIndic.destroy()
-        if ReponseJoueur.get() != reponse:
+    def Accept(event):      #Cette fonction sert à vérifier la réponse du joueur et d'agir en conséquence
+        global ReponseJoueur, score, nbrEssai, labelIndic, labelVide2
+        if ReponseJoueur.get() != reponse:          #Si le joueur donne une mauvaise réponse, on lui dit combien d'essai il lui reste.
+            labelIndic.destroy()
+            labelVide2.destroy()
             labelIndic = Label(fenetreJeu, text='Il te reste ' + str(nbrEssai) + ' essais.', font = 'Helvetica 12 bold', justify=CENTER)
             labelIndic.pack()
             ReponseJoueur.set('')
             nbrEssai -= 1
-        if ReponseJoueur.get() == reponse and nbrEssai > 0:
+        if ReponseJoueur.get() == reponse and nbrEssai > 0:         #S'il donne une bonne réponse, on le lui indique et on passe au mot suivant en réinitialisant la zone de réponse.
+            labelIndic.destroy()
+            labelVide2.destroy()
             score += 1
             labelIndic = Label(fenetreJeu, text= 'Ceci est la bonne réponse!', font = 'Helvetica 12 bold', justify=CENTER)
             labelIndic.pack()
+            labelVide2 = Label(fenetreJeu, text = '\n', font = 'Helvetica 12 bold', justify = CENTER, bg = fenetreJeu['bg'])
+            labelVide2.pack()
             ReponseJoueur.set('')
             nbrEssai = 4
-            time.sleep(0.5)
-            labelIndic.destroy()
             Game()
-        if nbrEssai == -1 and ReponseJoueur.get() != reponse:
+        if nbrEssai == -1 and ReponseJoueur.get() != reponse:       #S'il s'est trompé, on lui indique la bonne réponse et on passe au mot suivant.
             labelIndic.destroy()
+            labelVide2.destroy()
             labelIndic = Label(fenetreJeu, text= "La reponse était '" + str(reponse) + "' .", font='Helvetica 12 bold', justify=CENTER)
             labelIndic.pack()
+            labelVide2 = Label(fenetreJeu, text = '\n', font = 'Helvetica 12 bold', justify = CENTER, bg = fenetreJeu['bg'])
+            labelVide2.pack()
             ReponseJoueur.set('')
             nbrEssai = 4
-            time.sleep(1)
-            labelIndic.destroy()
             Game()
 
-    labelIndic.destroy()
     labelMot.destroy()
     EntreeRep.destroy()
-    compteurMot += 1
-    if actFr == 1 and nbMot!=compteurMot:
-        hasard = random.randint(0, len(listfA))
-        mot = repareMot(listfA[hasard])
-        reponse = repareMot(listfF[hasard])
-        reponse.lower()
-        labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)
+    compteurMot += 1                #A chaque fois que la fonction est lancée, on ajoute plus 1 au compteur de mot fait.
+    if actFr == 1 and nbMot!=compteurMot:           #Tant que le compteur est différent du nombre de mot, on lance le jeu.
+        hasard = random.randint(0, len(listfA))     #On choisit au hasard un nombre entre 0 et la longueur de la liste du fichier .txt
+        mot = repareMot(listfA[hasard])             #On indique quel est le mot à traduire
+        reponse = repareMot(listfF[hasard])         #La réponse est le mot réparé contenu dans l'autre liste ayant le même nombre que le mot affiché
+        reponse.lower()             #On met la réponse en minuscule au cas où
+        labelMot = Label(fenetreJeu, text = mot, font='Helvetica 12 bold', justify=CENTER)      #On affiche le mot à traduire
         labelMot.pack()
-        EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
+        EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)      #On indique la zone de texte où le joueur pourra répondre
         EntreeRep.pack()
-        EntreeRep.bind('<KeyPress-Return>', Accept)
+        EntreeRep.bind('<KeyPress-Return>', Accept)     #A chaque fois que le joueur appuie sur le bouton Entrée, on lance la fonction Accept
     if actAn == 1 and nbMot!=compteurMot:
         hasard = random.randint(0, len(listfA))
         mot = repareMot(listfF[hasard])
@@ -250,7 +253,7 @@ def Game():
         EntreeRep = Entry(fenetreJeu, textvariable= ReponseJoueur, font = 'Helvetica 12 bold', justify=CENTER)
         EntreeRep.pack()
         EntreeRep.bind('<KeyPress-Return>', Accept)
-    if nbMot == compteurMot:
+    if nbMot == compteurMot:        #Si le compteur de mot est égale au nombre de mot choisi, le jeu efface tous les labels et autre zone de texte pour afficher le score.
         labelIndic.destroy()
         labelMot.destroy()
         EntreeRep.destroy()
@@ -262,9 +265,9 @@ def Game():
 boutonFr = Button(fenetreJeu, text='Français', font='Helvetica 12 bold', command = Francais)
 boutonAn = Button(fenetreJeu, text='Anglais', font='Helvetica 12 bold', command = Anglais)
 
-boutonFr.bind('<Activate>', Game )
+boutonFr.bind('<Activate>', Game )          #Dès que l'un des boutons est activé, on lance le jeu une première fois
 boutonAn.bind('<Activate>', Game )
 
-fenetreJeu.mainloop()
-fA.close()
+fenetreJeu.mainloop()               #Sert à indiquer que c'est la fenêtre principal pour ce jeu.
+fA.close()          #On ferme les différents fichiers .txt pour pouvoir les réutiliser quand on relance le jeu.
 fF.close()
