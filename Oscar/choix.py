@@ -5,7 +5,7 @@ import copy, time
 #-------------------------------------------
 
 windo = Tk()
-windo.configure(width=800, height=375)
+windo.configure(width=700, height=375)
 windo.title("Trouve la capitale")
 
 #------------------------------------------
