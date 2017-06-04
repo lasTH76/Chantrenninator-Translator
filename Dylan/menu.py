@@ -1,8 +1,8 @@
 from tkinter import *
 import tkinter as tk
 from tkinter.messagebox import *
-import time, random, sys, os, smtplib
-from time import time, sleep
+import time, random, sys, os, smtplib #permet d'utliser les commandes systèmes (comme l'utilisation de fichier exterieur) et le random sert à demander au système de choisir un nombre aléatoire.
+from time import time, sleep #sleep permet de mettre en pause le programme (ou une fonction) pendant un certain temps.
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk() #Cela permet de créer la fenêtre graphique
 fenetre.configure(width=550, height=350) #Cela permet de configure la taille de la fenêtre en pixels.
@@ -37,11 +37,6 @@ def update(delay=200): #Fonction qui permet d'animer les gifs en affichant chaqu
 update() #execute le fonction "update"
 #--------------------------------------------------------------------------------------------------------------
 ##fonction menu
-def menu_graphf():
-	menu_graphf=Toplevel() #Permet de créer une fenêtre au dessus de la principale
-	menu_graphf.configure(width=350,height=200) #On régle la taille de la fenêtre
-	menu_graphf.title("Graphique") #On donne un nom a notre fenêtre
-	menu_graphf.resizable(width=False, height=False) #Fonction qui évite le redimensionnement
 
 def reportf():
 	reportf=Toplevel() #Permet de créer une fenêtre au dessus de la principale
@@ -70,12 +65,13 @@ def reportf():
 
 	def ELRport():
                 
-		fromaddr = emmailbox1.get()
-		toaddrs = 'dylan.e@hotmail.fr'
-		msg = sujetext1.get()
-		MDP = motdepasse.get()
+		fromaddr = emmailbox1.get() #Récuperer la valeur entré
+		toaddrs = 'dylan.e@hotmail.fr' #Addresse electronique de l'un des créateurs
+
+		msg = sujetext1.get() #Récuperer la valeur entré
+		MDP = motdepasse.get() #Récuperer la valeur entré
                 
-		server = smtplib.SMTP('smtp.gmail.com', 235)
+		server = smtplib.SMTP('smtp.gmail.com', 235) 
 		server.ehlo()
 		server.starttls()
 		server.login(fromaddr , MDP)
@@ -104,18 +100,16 @@ fenetre.config(menu=menubar) #On configure la barre de menu.
 #--------------------------------------------------------------------------------------------------------------
 ##fonction ouverture
 def batjeu1():
-	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
 	os.popen("jeu_calcul_mental.py") #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
 
 def batjeu2():
-	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
-
+	os.popen("JeuMorse.py") #Ouvrir le programme "jeu du morse" en laissant la main au programme principale.
 
 def batjeu3():
-	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
+	os.popen("choix.py") #Ouvrir le programme "jeu des capitales" en laissant la main au programme principale.
 
 def batjeu4():
-	os.chdir("C:\\Users\\Anonymed\\Desktop\\BAC") #Changer le répertoire.
+	os.popen("traducteur.py") #Ouvrir le programme "jeu de traduction Ang/Fr" en laissant la main au programme principale.
 
 #--------------------------------------------------------------------------------------------------------------
 ##bouton menu
