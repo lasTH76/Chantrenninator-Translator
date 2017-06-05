@@ -1,4 +1,4 @@
-﻿import os, random, sys, time, threading, shelve, smtplib
+import os, random, sys, time, threading, shelve, smtplib
 from tkinter import *
 
 #os.chdir('C:\Python34')

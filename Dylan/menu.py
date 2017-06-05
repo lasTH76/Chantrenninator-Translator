@@ -1,63 +1,64 @@
 from tkinter import *
 import tkinter as tk
 from tkinter.messagebox import *
-import time, random, sys, os, smtplib #permet d'utliser les commandes systèmes (comme l'utilisation de fichier exterieur) et le random sert à demander au système de choisir un nombre aléatoire.
+import time, random, sys, os, smtplib #permet d'utliser les commandes systèmes (comme l'utilisation de fichier exterieur) et le random sert à demander au système de choisir un nombre aléatoirement.
 from time import time, sleep #sleep permet de mettre en pause le programme (ou une fonction) pendant un certain temps.
+
 #--------------------------------------------------------------------------------------------------------------
 fenetre = Tk() #Cela permet de créer la fenêtre graphique
-fenetre.configure(width=550, height=350) #Cela permet de configure la taille de la fenêtre en pixels.
+fenetre.configure(width=550, height=350) #Cela permet de configurer la taille de la fenêtre en pixels.
 fenetre.title("Jeux de réflexion et de logique") #Cela permet de donner un titre à la fenêtre (dans ce cas là le titre de la fenêtre est "Jeux de réflexion et de logique").
-fenetre.resizable(width=False, height=False) #Cela permet d'éviter que l'utilisateur redimensionne la fenêtre comme il le souhaîte.
+fenetre.resizable(width=False, height=False) #Cela permet d'éviter que l'utilisateur redimensionne la fenêtre comme il le souhaite.
 
 #--------------------------------------------------------------------------------------------------------------
 ##image menu
 textitlemenu=PhotoImage(file="image/nuage_title-menu.png") #Cette commande permet d'utiliser une image sur la fenêtre pour l'utiliser comme devanture.
-canttml = Canvas(fenetre, width=500,height=145) #Cela permet de redimentionner l'image.
+canttml = Canvas(fenetre, width=500,height=145) #Cela permet de redimensionner l'image.
 canttml.create_image(0,0,anchor='nw', image=textitlemenu) #Cette commande permet de créer l'image et de l'afficher.
 canttml.place(x=115, y=20) #Cette commande permet de placer l'image sur la fenêtre avec un système de coordonnée.
 
 gif_parle=PhotoImage(file="image/einstein_montre.gif")
-can1 = Canvas(fenetre, width=120,height=135) #Cela permet de redimentionner le gif.
+can1 = Canvas(fenetre, width=120,height=135) #Cela permet de redimensionner le gif.
 can1.create_image(0,0,anchor='nw', image=gif_parle) #Cette commande permet de créer le gif et de l'afficher.
 can1.place(x=10, y=0) #Coordonnées du gif.
 
 gif_parle2=PhotoImage(file="image/einstein_montre.gif")
-can2 = Canvas(fenetre, width=120,height=135) #Cela permet de redimentionner le gif.
+can2 = Canvas(fenetre, width=120,height=135) #Cela permet de redimensionner le gif.
 can2.create_image(0,0,anchor='nw', image=gif_parle2) #Cette commande permet de créer le gif et de l'afficher.
 can2.place(x=450, y=0) #Coordonnées du gif.
 
 ind = -1 #La variable ind prend la valeur -1
-def update(delay=200): #Fonction qui permet d'animer les gifs en affichant chaques images entre un intervalle de temps.
+def update(delay=200): #Fonction qui permet d'animer les gifs en affichant chaque image entre un intervalle de temps.
     global ind #Cela permet d'utiliser une variable exterieur dans la fonction.
     ind += 1 #Permet d'incrémenter de 1 la variable ind
     if ind == 8: ind = 0 #Si le gif atteint la 8e image (qui est la dernière), il recommence à 0.
     gif_parle.configure(format="gif -index " + str(ind)) #Permet d'afficher une image spécifique avec -index X (étant entre 0 et 8) se trouvant dans la compilation d'image qui est le gif.
     gif_parle2.configure(format="gif -index " + str(ind)) #Permet d'afficher une image spécifique avec -index X (étant entre 0 et 8) se trouvant dans la compilation d'image qui est le gif.
     fenetre.after(delay, update)
-update() #execute le fonction "update"
+update() #execute la fonction "update"
 #--------------------------------------------------------------------------------------------------------------
 ##fonction menu
 
 def reportf():
 	reportf=Toplevel() #Permet de créer une fenêtre au dessus de la principale
-	reportf.configure(width=600, height=300) #On régle la taille de la fenêtre
-	reportf.title("Reporter un bug") #On donne un nom a notre fenêtre
+	reportf.configure(width=600, height=300) #On règle la taille de la fenêtre
+	reportf.title("Reporter un bug") #On donne un nom à notre fenêtre
 	reportf.resizable(width=False, height=False) #Fonction qui évite le redimensionnement
 
-	labelrepor1 = Label(reportf, text="E-mail :", font = "Helvetica 15 bold") #Création d'un label avec une police définit
+	labelrepor1 = Label(reportf, text="E-mail :", font = "Helvetica 15 bold") #Création d'un label avec une police définie
 	labelrepor1.place(x=0, y=0) #Coordonnées du label
 	emmailbox1 = StringVar()
 	emmailbox1.set("@gmail.com")
 	email1 = Entry(reportf, textvariable = emmailbox1, width=21, font="Helvetica 15 bold", justify=CENTER)
 	email1.place(x=90, y=0) #Coordonnées du label
 
-	labelMDP = Label(reportf, text="Votre mot de passe d'email:", width=21, font="Helvetica 15 bold") #Création d'un label avec une police définit
+	labelMDP = Label(reportf, text="Votre mot de passe d'email:", width=21, font="Helvetica 15 bold") #Création d'un label avec une police définie
 	labelMDP.place(x=0, y=100) #Coordonnées du label
 	motdepasse = StringVar()
 	MDP = Entry(reportf, textvariable = motdepasse, width = 21, font="Helevetica 15 bold", justify=CENTER)
 	MDP.place(x=280, y=100) #Coordonnées du label
 
-	labelreport2 = Label(reportf, text= "Indiquez de ce coté l'erreur rencontrée:", font = "Helvetica 15 bold") #Création d'un label avec une police définit
+	labelreport2 = Label(reportf, text= "Indiquez de ce coté l'erreur rencontrée:", font = "Helvetica 15 bold") #Création d'un label avec une police définie
 	labelreport2.place(x=0, y=175) #Coordonnées du label
 	sujetext1 = StringVar()
 	sujet1 = Entry(reportf, textvariable = sujetext1, width=21, font="Helvetica 15 bold", justify=CENTER)
@@ -65,11 +66,11 @@ def reportf():
 
 	def ELRport():
                 
-		fromaddr = emmailbox1.get() #Récuperer la valeur entré
-		toaddrs = 'dylan.e@hotmail.fr' #Addresse electronique de l'un des créateurs
+		fromaddr = emmailbox1.get() #Récuperer la valeur entrée
+		toaddrs = 'dylan.e@hotmail.fr' #Addresse électronique de l'un des créateurs
 
-		msg = sujetext1.get() #Récuperer la valeur entré
-		MDP = motdepasse.get() #Récuperer la valeur entré
+		msg = sujetext1.get() #Récuperer la valeur entrée
+		MDP = motdepasse.get() #Récuperer la valeur entrée
                 
 		server = smtplib.SMTP('smtp.gmail.com', 235) 
 		server.ehlo()
@@ -100,16 +101,16 @@ fenetre.config(menu=menubar) #On configure la barre de menu.
 #--------------------------------------------------------------------------------------------------------------
 ##fonction ouverture
 def batjeu1():
-	os.popen("jeu_calcul_mental.py") #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
+	exec(open("./jeu_calcul_mental.py").read()) #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
 
 def batjeu2():
-	os.popen("JeuMorse.py") #Ouvrir le programme "jeu du morse" en laissant la main au programme principale.
+	exec(open("./JeuMorse.py").read()) #Ouvrir le programme "jeu du morse" en laissant la main au programme principale.
 
 def batjeu3():
-	os.popen("choix.py") #Ouvrir le programme "jeu des capitales" en laissant la main au programme principale.
+	exec(open("./choix.py").read()) #Ouvrir le programme "jeu des capitales" en laissant la main au programme principale.
 
 def batjeu4():
-	os.popen("traducteur.py") #Ouvrir le programme "jeu de traduction Ang/Fr" en laissant la main au programme principale.
+	exec(open("./traducteur.py").read()) #Ouvrir le programme "jeu de traduction Ang/Fr" en laissant la main au programme principale.
 
 #--------------------------------------------------------------------------------------------------------------
 ##bouton menu
