@@ -21,7 +21,7 @@ listfF = [line.split('/n') for line in fF.readlines()]              #je lui dema
 listfA = [line.split('/n') for line in fA.readlines()]
 
 #---------------------------------------------------------------
-fenetreJeu = Toplevel()
+fenetreJeu = Tk()           #Mettre Toplevel pour le menu
 fenetreJeu.title('Jeu de traduction')
 fenetreJeu['bg'] = 'grey'                   #je cree une fenêtre en lui donnant un nom et un fond
 fenetreJeu.geometry('500x500+750+350')      #je place la fenêtre a l'ecran et je parametre sa taille

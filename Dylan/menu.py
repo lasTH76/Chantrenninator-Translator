@@ -101,16 +101,16 @@ fenetre.config(menu=menubar) #On configure la barre de menu.
 #--------------------------------------------------------------------------------------------------------------
 ##fonction ouverture
 def batjeu1():
-	exec(open("./jeu_calcul_mental.py").read()) #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
+	os.popen("jeu_calcul_mental.py") #Ouvrir le programme "jeu_calcul_mental" en laissant la main au programme principale.
 
 def batjeu2():
-	exec(open("./JeuMorse.py").read()) #Ouvrir le programme "jeu du morse" en laissant la main au programme principale.
+	os.popen("JeuMorse.py") #Ouvrir le programme "jeu du morse" en laissant la main au programme principale.
 
 def batjeu3():
-	exec(open("./choix.py").read()) #Ouvrir le programme "jeu des capitales" en laissant la main au programme principale.
+	os.popen("choix.py") #Ouvrir le programme "jeu des capitales" en laissant la main au programme principale.
 
 def batjeu4():
-	exec(open("./traducteur.py").read()) #Ouvrir le programme "jeu de traduction Ang/Fr" en laissant la main au programme principale.
+	os.popen("traducteur.py") #Ouvrir le programme "jeu de traduction Ang/Fr" en laissant la main au programme principale.
 
 #--------------------------------------------------------------------------------------------------------------
 ##bouton menu

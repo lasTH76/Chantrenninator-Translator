@@ -2,7 +2,7 @@ import random, sys, time, threading, shelve, smtplib
 from tkinter import *
 
 #_______________________________________________________________
-fenetreJeu2 = Toplevel()
+fenetreJeu2 = Tk()
 fenetreJeu2.title('Le Morse')
 fenetreJeu2['bg'] = 'grey'                   #je cree une fenêtre en lui donnant un nom et un fond
 fenetreJeu2.geometry('800x300+650+350')      #je place la fenêtre a l'ecran et je parametre sa taille

@@ -7,7 +7,7 @@ from threading import Thread #permet d'éxecuter des tâches multiples en même 
 import os, sys, random #permet d'utliser les commandes systèmes (comme l'utilisation de fichier exterieur) et le random sert à demander au système de choisir un nombre aléatoire.
 #----------------------------------------------------
 ##fenêtre de configuration
-jeu1 = Tk() #Cela permet de créer la fenêtre graphique
+jeu1 = Toplevel() #Cela permet de créer la fenêtre graphique
 jeu1.configure(width=300, height=350) #Cela permet de configure la taille de la fenêtre en pixels.
 jeu1.title("Calcul mental") #Cela permet de donner un titre à la fenêtre (dans ce cas là le titre de la fenêtre est "Calcul mental").
 jeu1.resizable(width=False, height=False) #Cela permet d'éviter que l'utilisateur redimensionne la fenêtre comme il le souhaîte.
@@ -20,7 +20,7 @@ canttl.place(x=45, y=10) #Cette commande permet de placer l'image sur la fenêtr
 #-----------------------------------------------------
 ##fenêtre top level
 def aide():
-	showinfo("Aide", "Pour commencer à jouer il suffit d'utiliser la touche Entrez!") #On crée une fenêtre alerte pour aider l'utilisateur.
+	showinfo("Aide", "Pour commencer a jouer il suffit d'utiliser la touche Entree!") #On crée une fenêtre alerte pour aider l'utilisateur.
 
 def temps():
 	global tmpr, tmp, score1, t #Cela permet d'utiliser une variable qui se trouve en dehors de la fonction
@@ -57,7 +57,7 @@ def temps():
 	labeltop2 = Label(top2, text="Temps : "+str(tmp)+"s", font = "Helvetica 22 bold") #Création d'un label avec une police définit.
 	labeltop2.place(x=5, y=0) #Coordonnées du label.
 
-	labelnb2 = Label(top2, text="Entrez la durée du quizz :", font="Helvetica 10 bold") #Label pour guider l'utilisateur.
+	labelnb2 = Label(top2, text="Entrez la duree du quizz :", font="Helvetica 10 bold") #Label pour guider l'utilisateur.
 	labelnb2.place(x=20, y=50) #Coordonnées du label.
 	jerenit1 = StringVar() #Récupère la valeur du temps définit par l'utilisateur.
 	jerenitlabel = Entry(top2, textvariable = jerenit1, width=10, justify=CENTER, font="Helvetica 15 bold") #Création d'une textbox de longueur 30.
@@ -66,7 +66,7 @@ def temps():
 	b1t2.place(x=110, y=160) #Coordonnées du bouton.
 	b2t2=Button(top2, text="Annuler", padx=15, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=top2.destroy) #Bouton qui permet d'annuler la modification en fermant la fenêtre.
 	b2t2.place(x=10, y=160) #Coordonnées du bouton.
-	b2t2=Button(top2, text="Rénitialiser", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=renitial) #Bouton qui permet de remettre le temps à 10 secondes en executant la fonction renitial.
+	b2t2=Button(top2, text="Reinitialiser", padx=5, pady=3, font = "Helvetica 10 bold", relief=GROOVE, activebackground="#A4A4A4", command=renitial) #Bouton qui permet de remettre le temps à 10 secondes en executant la fonction renitial.
 	b2t2.place(x=50, y=120) #Coordonnées du bouton.
 
 #-----------------------------------------------------
@@ -188,7 +188,7 @@ def reniti1(): #Cette fonction permet de relancer le jeu.
 #----------------------------------------------------------
 #réponder au question avant le temps imparti
 
-tot2=Label(jeu1, text="Résultat : ", font = "Helvetica 20 bold") #On crée le label "tot2" pour afficher les résultats.
+tot2=Label(jeu1, text="Resultat : ", font = "Helvetica 20 bold") #On crée le label "tot2" pour afficher les résultats.
 tot2.place(x=5, y=220) #Coordonnées du label.
 
 calcul1=Label(jeu1, text="", font = "Helvetica 20 bold") #On crée le label "calcul1" pour afficher les opérations.
